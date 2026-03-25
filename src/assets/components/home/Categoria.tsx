@@ -8,6 +8,7 @@ import {
   Stethoscope,
   Shirt,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
@@ -53,11 +54,23 @@ const categories = [
 ];
 
 export default function Categoria() {
+  const navigate = useNavigate();
+
+  function handleCategoryClick(category: string) {
+    const params = new URLSearchParams();
+    params.set("q", category);
+    params.set("local", "Gravatá - PE");
+
+    navigate(`/resultados?${params.toString()}`);
+  }
+
   return (
     <section id="categorias" className="bg-slate-50 px-6 py-14 md:py-16">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          
+          <span className="rounded-full bg-slate-200 px-4 py-1 text-sm font-medium text-slate-700">
+            Explore o portal
+          </span>
 
           <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 md:text-4xl">
             Encontre negócios por categoria
@@ -75,9 +88,10 @@ export default function Categoria() {
             return (
               <article
                 key={category.name}
-                className="group rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-5"
+                onClick={() => handleCategoryClick(category.name)}
+                className="group cursor-pointer rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-5"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 transition group-hover:bg-orange-100 group-hover:text-orange-600">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 transition group-hover:bg-orange-100 group-hover:text-orange-500">
                   <Icon className="h-5 w-5" />
                 </div>
 
@@ -89,7 +103,7 @@ export default function Categoria() {
                   {category.description}
                 </p>
 
-                <button className="mt-4 text-xs font-semibold text-slate-900 transition group-hover:text-orange-600 md:text-sm">
+                <button className="mt-4 text-xs font-semibold text-slate-900 transition group-hover:text-orange-500 md:text-sm">
                   Explorar →
                 </button>
               </article>

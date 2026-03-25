@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Menu, Search } from "lucide-react";
 
+
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md shadow-sm">
