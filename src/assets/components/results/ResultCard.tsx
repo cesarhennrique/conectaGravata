@@ -63,9 +63,11 @@ export default function ResultCard({
               Ver detalhes
             </Link>
 
-            <button className="rounded-2xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
-              WhatsApp
-            </button>
+            <a  href={`https://wa.me/5581999999999?text=Olá! Vi sua empresa no Conecta Gravatá e quero mais informações.`}>
+              <button className="rounded-2xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
+                WhatsApp
+              </button>
+            </a>
           </div>
         </div>
       </div>
