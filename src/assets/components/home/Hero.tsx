@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -13,27 +13,17 @@ const quickCategories = [
 ];
 
 export default function Hero() {
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [location, setLocation] = useState("Gravatá - PE");
-
   function handleSearch() {
-    const params = new URLSearchParams();
+    if (!search.trim()) return;
 
-    if (search.trim()) params.set("q", search);
-    if (location.trim()) params.set("local", location);
-
-    navigate(`/resultados?${params.toString()}`);
+    navigate(`/resultados?q=${search}&local=Gravatá`);
   }
-
-  function handleQuickCategory(category: string) {
-    const params = new URLSearchParams();
-    params.set("q", category);
-    params.set("local", "Gravatá - PE");
-
-    navigate(`/resultados?${params.toString()}`);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function handleQuickCategory(item: string): void {
+    throw new Error("Function not implemented.");
   }
 
   return (

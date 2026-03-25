@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const categories = [
   "Restaurante",
@@ -59,10 +58,7 @@ export default function FiltersSidebar() {
                 <button
                   key={category}
                   onClick={() =>
-                    updateParam(
-                      "categoria",
-                      active ? "" : category
-                    )
+                    updateParam("categoria", active ? "" : category)
                   }
                   className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
                     active
@@ -78,7 +74,9 @@ export default function FiltersSidebar() {
         </div>
 
         <div className="mt-6">
-          <h3 className="text-sm font-semibold text-slate-900">Faixa de preço</h3>
+          <h3 className="text-sm font-semibold text-slate-900">
+            Faixa de preço
+          </h3>
 
           <div className="mt-3 flex flex-wrap gap-2">
             {prices.map((price) => {
@@ -115,7 +113,25 @@ export default function FiltersSidebar() {
               Aberto agora
             </label>
 
-      
+            <label className="flex cursor-pointer items-center gap-2">
+              <input
+                type="checkbox"
+                checked={acceptCard}
+                onChange={(e) => updateParam("cartao", e.target.checked)}
+                className="rounded border-slate-300"
+              />
+              Aceita cartão
+            </label>
+
+            <label className="flex cursor-pointer items-center gap-2">
+              <input
+                type="checkbox"
+                checked={familyFriendly}
+                onChange={(e) => updateParam("familia", e.target.checked)}
+                className="rounded border-slate-300"
+              />
+              Bom para famílias
+            </label>
           </div>
         </div>
       </div>
