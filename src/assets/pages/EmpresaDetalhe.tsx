@@ -1,4 +1,4 @@
-import { Clock, MapPin, MessageCircle, Phone, Star, AtSign } from "lucide-react";
+import { Clock, MapPin, MessageCircle, Phone, AtSign } from "lucide-react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 
@@ -108,10 +108,7 @@ export default function EmpresaDetalhe() {
                 </h1>
 
                 <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-slate-600">
-                  <div className="flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1.5 font-semibold text-amber-600">
-                    <Star className="h-4 w-4 fill-current" />
-                    {business.rating.toFixed(1)}
-                  </div>
+                
 
                   <div className="flex items-center gap-2">
                     <MapPin className="h-4 w-4" />

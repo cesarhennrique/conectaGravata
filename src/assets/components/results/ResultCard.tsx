@@ -1,4 +1,4 @@
-import { MapPin, Star } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 type ResultCardProps = {
@@ -7,8 +7,8 @@ type ResultCardProps = {
   category: string;
   location: string;
   image: string;
-  rating: number;
   description: string;
+  plan: "premium" | "pro" | "basic";
 };
 
 export default function ResultCard({
@@ -17,18 +17,32 @@ export default function ResultCard({
   category,
   location,
   image,
-  rating,
   description,
+  plan,
 }: ResultCardProps) {
+  const isPremium = plan === "premium";
+
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md">
+    <article
+      className={`rounded-3xl border bg-white p-4 shadow-sm transition hover:shadow-md ${
+        isPremium
+          ? "border-orange-300 ring-1 ring-orange-100"
+          : "border-slate-200"
+      }`}
+    >
       <div className="flex flex-col gap-4 md:flex-row">
-        <div className="h-48 w-full overflow-hidden rounded-2xl md:h-40 md:w-60">
+        <div className="relative h-48 w-full overflow-hidden rounded-2xl md:h-40 md:w-60">
           <img
             src={image}
             alt={name}
             className="h-full w-full object-cover"
           />
+
+          {isPremium && (
+            <span className="absolute left-3 top-3 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white shadow-sm">
+              Destaque
+            </span>
+          )}
         </div>
 
         <div className="flex flex-1 flex-col justify-between">
@@ -37,11 +51,6 @@ export default function ResultCard({
               <div>
                 <p className="text-sm font-medium text-slate-500">{category}</p>
                 <h3 className="mt-1 text-2xl font-bold text-slate-900">{name}</h3>
-              </div>
-
-              <div className="flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-sm font-semibold text-amber-600">
-                <Star className="h-4 w-4 fill-current" />
-                {rating.toFixed(1)}
               </div>
             </div>
 
@@ -58,16 +67,18 @@ export default function ResultCard({
           <div className="mt-5 flex items-center gap-3">
             <Link
               to={`/empresa/${id}`}
-              className="rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
+              className={`rounded-2xl px-4 py-2.5 text-sm font-semibold text-white transition ${
+                isPremium
+                  ? "bg-orange-500 hover:bg-orange-600"
+                  : "bg-slate-900 hover:opacity-90"
+              }`}
             >
               Ver detalhes
             </Link>
 
-            <a  href={`https://wa.me/5581999999999?text=Olá! Vi sua empresa no Conecta Gravatá e quero mais informações.`}>
-              <button className="rounded-2xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
-                WhatsApp
-              </button>
-            </a>
+            <button className="rounded-2xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
+              WhatsApp
+            </button>
           </div>
         </div>
       </div>

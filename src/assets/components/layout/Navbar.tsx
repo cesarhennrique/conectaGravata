@@ -17,7 +17,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white backdrop-blur-md shadow-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
           {/* Logo */}
           <Link to="/" className="flex items-center" onClick={closeMenu}>
@@ -52,10 +52,10 @@ export default function Navbar() {
             </a>
 
             <Link
-              to="/anuncie"
+              to="/prestadores"
               className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
             >
-              Anuncie
+              Prestadores
             </Link>
           </nav>
 

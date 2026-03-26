@@ -4,6 +4,7 @@ import Anuncie from "../pages/Anuncie";
 import CadastroEmpresa from "../pages/CadastroEmpresa";
 import Resultados from "../pages/Resultados";
 import EmpresaDetalhe from "../pages/EmpresaDetalhe";
+import Prestadores from "../pages/Prestadores";
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
         <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
         <Route path="/resultados" element={<Resultados />} />
         <Route path="/empresa/:id" element={<EmpresaDetalhe />} />
+        <Route path="/prestadores" element={<Prestadores />} />
       </Routes>
     </BrowserRouter>
   );
