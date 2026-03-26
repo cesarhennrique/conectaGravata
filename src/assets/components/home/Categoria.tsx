@@ -7,6 +7,7 @@ import {
   ShoppingBag,
   Stethoscope,
   Shirt,
+  ArrowUpRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,49 +15,49 @@ const categories = [
   {
     name: "restaurante",
     label: "Restaurantes",
-    description: "Almoço, jantar e experiências.",
+    description: "Descubra opções para almoço, jantar e experiências especiais.",
     icon: UtensilsCrossed,
   },
   {
     name: "pousada",
     label: "Pousadas",
-    description: "Hospedagens e descanso.",
+    description: "Hospedagens acolhedoras para descansar e aproveitar Gravatá.",
     icon: Hotel,
   },
   {
     name: "cafeteria",
     label: "Cafeterias",
-    description: "Café, encontro e pausa.",
+    description: "Cafés, encontros e pausas em lugares cheios de charme.",
     icon: Coffee,
   },
   {
     name: "serviços",
     label: "Serviços",
-    description: "Profissionais e manutenção.",
+    description: "Profissionais locais para manutenção, reparos e suporte rápido.",
     icon: Wrench,
   },
   {
     name: "beleza",
     label: "Beleza",
-    description: "Estética e cuidados pessoais.",
+    description: "Salões, estética e cuidados pessoais para o dia a dia.",
     icon: Scissors,
   },
   {
     name: "loja",
     label: "Lojas",
-    description: "Moda, presentes e variedades.",
+    description: "Presentes, utilidades e variedades para moradores e turistas.",
     icon: ShoppingBag,
   },
   {
     name: "saúde",
     label: "Saúde",
-    description: "Clínicas e bem-estar.",
+    description: "Clínicas, consultórios e serviços voltados ao bem-estar.",
     icon: Stethoscope,
   },
   {
     name: "moda",
     label: "Moda",
-    description: "Roupas e acessórios.",
+    description: "Roupas, acessórios e tendências em negócios locais.",
     icon: Shirt,
   },
 ];
@@ -69,23 +70,39 @@ export default function Categoria() {
   }
 
   return (
-    <section id="categorias" className="bg-slate-50 px-6 py-14 md:py-16">
+    <section
+      id="categorias"
+      className="bg-[linear-gradient(to_bottom,#f8fafc,#ffffff)] px-6 py-16 md:py-20"
+    >
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-2xl">
-          <span className="rounded-full bg-slate-200 px-4 py-1 text-sm font-medium text-slate-700">
-            Explore o portal
-          </span>
+        {/* Header */}
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <span className="inline-flex rounded-full border border-slate-200 bg-white px-4 py-1.5 text-sm font-medium text-slate-600 shadow-sm">
+              Explore o portal
+            </span>
 
-          <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 md:text-4xl">
-            Encontre negócios por categoria
-          </h2>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+              Encontre negócios por categoria
+            </h2>
 
-          <p className="mt-3 text-sm leading-6 text-slate-600 md:text-base">
-            Descubra empresas, experiências e serviços locais de forma simples e rápida.
-          </p>
+            <p className="mt-3 text-sm leading-7 text-slate-600 md:text-base">
+              Descubra empresas, experiências e serviços locais em uma navegação
+              simples, visual e pensada para facilitar sua busca em Gravatá.
+            </p>
+          </div>
+
+          <button
+            onClick={() => navigate("/resultados?local=Gravatá")}
+            className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+          >
+            Ver todas
+            <ArrowUpRight className="h-4 w-4" />
+          </button>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+        {/* Grid */}
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {categories.map((category) => {
             const Icon = category.icon;
 
@@ -93,23 +110,30 @@ export default function Categoria() {
               <article
                 key={category.name}
                 onClick={() => handleCategoryClick(category.name)}
-                className="group cursor-pointer rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-5"
+                className="group cursor-pointer overflow-hidden rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-orange-300 hover:shadow-lg"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 transition group-hover:bg-orange-100 group-hover:text-orange-500">
-                  <Icon className="h-5 w-5" />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xlbg-orange-50 text-orange-500 transition group-hover:bg-orange-100 group-hover:text-orange-600">
+                    <Icon className="h-6 w-6" />
+                  </div>
+
+                  <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-500 transition group-hover:bg-orange-50 group-hover:text-orange-600">
+                    Explorar
+                  </div>
                 </div>
 
-                <h3 className="mt-4 text-base font-bold tracking-tight text-slate-900 md:text-lg">
+                <h3 className="mt-6 text-xl font-bold tracking-tight text-slate-900">
                   {category.label}
                 </h3>
 
-                <p className="mt-2 text-xs leading-5 text-slate-600 md:text-sm">
+                <p className="mt-3 text-sm leading-7 text-slate-600">
                   {category.description}
                 </p>
 
-                <button className="mt-4 text-xs font-semibold text-slate-900 transition group-hover:text-orange-500 md:text-sm">
-                  Explorar →
-                </button>
+                <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-orange-600 transition group-hover:text-orange-600">
+                  Ver categoria
+                  <ArrowUpRight className="h-4 w-4" />
+                </div>
               </article>
             );
           })}
