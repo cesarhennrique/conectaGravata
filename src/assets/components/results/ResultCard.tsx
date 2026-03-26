@@ -9,6 +9,7 @@ type ResultCardProps = {
   image: string;
   description: string;
   plan: "premium" | "pro" | "basic";
+  whatsapp: string;
 };
 
 export default function ResultCard({
@@ -19,8 +20,26 @@ export default function ResultCard({
   image,
   description,
   plan,
+  whatsapp,
 }: ResultCardProps) {
   const isPremium = plan === "premium";
+
+  function handleWhatsAppClick() {
+    const mensagem = `
+Olá! Encontrei sua empresa no Conecta Gravatá.
+
+*Empresa:* ${name}
+*Local:* ${location}
+
+Gostaria de mais informações.
+    `.trim();
+
+    const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(
+      mensagem
+    )}`;
+
+    window.open(url, "_blank");
+  }
 
   return (
     <article
@@ -76,7 +95,10 @@ export default function ResultCard({
               Ver detalhes
             </Link>
 
-            <button className="rounded-2xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
+            <button
+              onClick={handleWhatsAppClick}
+              className="rounded-2xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+            >
               WhatsApp
             </button>
           </div>

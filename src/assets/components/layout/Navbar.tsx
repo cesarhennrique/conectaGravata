@@ -1,26 +1,45 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, Search, X } from "lucide-react";
 import { useState } from "react";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  function handleSearchClick() {
-    setMenuOpen(false);
-    navigate("/resultados?local=Gravatá");
-  }
 
   function closeMenu() {
     setMenuOpen(false);
   }
 
+  function handleSearchClick() {
+    closeMenu();
+    navigate("/resultados?local=Gravatá");
+  }
+
+  function goToSection(sectionId: string) {
+    closeMenu();
+
+    // Se não estiver na home, navega primeiro
+    if (location.pathname !== "/") {
+      navigate(`/#${sectionId}`);
+      return;
+    }
+
+    // Se já estiver na home, faz scroll
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white backdrop-blur-md shadow-sm">
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md shadow-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
-          {/* Logo */}
-          <Link to="/" className="flex items-center" onClick={closeMenu}>
+          
+          {/* LOGO */}
+          <Link to="/" onClick={closeMenu}>
             <img
               src="/logo.png"
               alt="Conecta Gravatá"
@@ -28,7 +47,7 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Menu desktop */}
+          {/* MENU DESKTOP */}
           <nav className="hidden items-center gap-8 md:flex">
             <Link
               to="/"
@@ -37,19 +56,19 @@ export default function Navbar() {
               Início
             </Link>
 
-            <a
-              href="/#categorias"
+            <button
+              onClick={() => goToSection("categorias")}
               className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
             >
               Categorias
-            </a>
+            </button>
 
-            <a
-              href="/#destaques"
+            <button
+              onClick={() => goToSection("destaques")}
               className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
             >
               Destaques
-            </a>
+            </button>
 
             <Link
               to="/prestadores"
@@ -59,7 +78,7 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Ações desktop */}
+          {/* AÇÕES DESKTOP */}
           <div className="hidden items-center gap-3 md:flex">
             <button
               onClick={handleSearchClick}
@@ -76,7 +95,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Botão mobile */}
+          {/* BOTÃO MOBILE */}
           <button
             onClick={() => setMenuOpen(true)}
             className="rounded-xl border border-slate-200 p-2 text-slate-700 md:hidden"
@@ -86,7 +105,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Overlay mobile */}
+      {/* OVERLAY */}
       {menuOpen && (
         <div
           className="fixed inset-0 z-[60] bg-slate-900/40 md:hidden"
@@ -94,18 +113,14 @@ export default function Navbar() {
         />
       )}
 
-      {/* Drawer mobile */}
+      {/* MENU MOBILE */}
       <aside
         className={`fixed right-0 top-0 z-[70] h-full w-[82%] max-w-[340px] bg-white p-6 shadow-2xl transition-transform duration-300 md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between">
-          <img
-            src="/logo.png"
-            alt="Conecta Gravatá"
-            className="h-10 w-auto"
-          />
+          <img src="/logo.png" alt="Conecta Gravatá" className="h-10" />
 
           <button
             onClick={closeMenu}
@@ -115,6 +130,7 @@ export default function Navbar() {
           </button>
         </div>
 
+        {/* AÇÕES */}
         <div className="mt-8 flex flex-col gap-3">
           <button
             onClick={handleSearchClick}
@@ -133,56 +149,38 @@ export default function Navbar() {
           </Link>
         </div>
 
+        {/* MENU */}
         <nav className="mt-8 flex flex-col gap-2">
           <Link
             to="/"
             onClick={closeMenu}
-            className="rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+            className="rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
           >
             Início
           </Link>
 
-          <a
-            href="/#categorias"
-            onClick={closeMenu}
-            className="rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+          <button
+            onClick={() => goToSection("categorias")}
+            className="text-left rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
           >
             Categorias
-          </a>
+          </button>
 
-          <a
-            href="/#destaques"
-            onClick={closeMenu}
-            className="rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+          <button
+            onClick={() => goToSection("destaques")}
+            className="text-left rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
           >
             Destaques
-          </a>
+          </button>
 
           <Link
-            to="/anuncie"
+            to="/prestadores"
             onClick={closeMenu}
-            className="rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+            className="rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
           >
-            Anuncie
+            Prestadores
           </Link>
         </nav>
-
-        <div className="mt-10 rounded-3xl border border-slate-200 bg-slate-50 p-4">
-          <p className="text-sm font-semibold text-slate-900">
-            Quer mais visibilidade em Gravatá?
-          </p>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
-            Anuncie sua empresa no portal e apareça para moradores e turistas.
-          </p>
-
-          <Link
-            to="/anuncie"
-            onClick={closeMenu}
-            className="mt-4 block rounded-2xl bg-slate-900 px-4 py-3 text-center text-sm font-semibold text-white transition hover:opacity-90"
-          >
-            Ver planos
-          </Link>
-        </div>
       </aside>
     </>
   );
