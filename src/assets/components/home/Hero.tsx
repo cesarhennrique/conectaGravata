@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 
 const quickCategories = [
-  "Restaurantes",
-  "Pousadas",
-  "Cafés",
-  "Serviços",
-  "Beleza",
+  "restaurante",
+  "pousada",
+  "cafeteria",
+  "serviços",
+  "beleza",
 ];
 
 export default function Hero() {
@@ -21,10 +21,10 @@ export default function Hero() {
 
     navigate(`/resultados?q=${search}&local=Gravatá`);
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function handleQuickCategory(item: string): void {
-    throw new Error("Function not implemented.");
-  }
+
+ function handleQuickCategory(item: string) {
+  navigate(`/resultados?q=${item}&local=Gravatá`);
+}
 
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,#f8fafc,#ffffff)]">

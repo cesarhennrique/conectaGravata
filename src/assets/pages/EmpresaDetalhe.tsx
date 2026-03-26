@@ -6,7 +6,7 @@ const businesses = [
   {
     id: "1",
     name: "Bistrô da Serra",
-    category: "Restaurante",
+    category: "Restaurantes",
     location: "Centro, Gravatá",
     image:
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1400&auto=format&fit=crop",
@@ -25,7 +25,7 @@ const businesses = [
   {
     id: "2",
     name: "Villa Gravatá",
-    category: "Pousada",
+    category: "Pousadas",
     location: "Alpes Suíços, Gravatá",
     image:
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1400&auto=format&fit=crop",
@@ -44,7 +44,7 @@ const businesses = [
   {
     id: "3",
     name: "Café do Mirante",
-    category: "Cafeteria",
+    category: "Cafeterias",
     location: "Centro, Gravatá",
     image:
       "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1400&auto=format&fit=crop",

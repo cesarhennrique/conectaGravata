@@ -96,6 +96,36 @@ const businesses = [
     card: true,
     familyFriendly: false,
   },
+  {
+  id: 7,
+  name: "Vida Clínica",
+  category: "Saúde",
+  location: "Centro, Gravatá",
+  image:
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop",
+  rating: 4.7,
+  description:
+    "Clínica com atendimento em diversas especialidades, estrutura moderna e localização central em Gravatá.",
+  priceLevel: "R$$",
+  openNow: true,
+  card: true,
+  familyFriendly: true,
+},
+{
+  id: 8,
+  name: "Loja Central",
+  category: "Loja",
+  location: "Centro, Gravatá",
+  image:
+    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop",
+  rating: 4.5,
+  description:
+    "Loja com variedades, presentes e utilidades para o dia a dia, atendendo moradores e visitantes em Gravatá.",
+  priceLevel: "R$",
+  openNow: true,
+  card: true,
+  familyFriendly: false,
+},
 ];
 
 export default function Resultados() {
@@ -120,7 +150,8 @@ export default function Resultados() {
       business.description.toLowerCase().includes(normalizedQuery);
 
     const matchesCategory =
-      !selectedCategory || business.category === selectedCategory;
+      !selectedCategory ||
+      business.category.toLowerCase().includes(selectedCategory.toLowerCase());
 
     const matchesPrice =
       !selectedPrice || business.priceLevel === selectedPrice;
@@ -180,7 +211,8 @@ export default function Resultados() {
                   Nenhum resultado encontrado
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-slate-600">
-                  Tente ajustar a busca ou remover alguns filtros para ver mais opções.
+                  Tente ajustar a busca ou remover alguns filtros para ver mais
+                  opções.
                 </p>
               </div>
             )}

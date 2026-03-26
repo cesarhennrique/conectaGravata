@@ -1,12 +1,12 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const categories = [
-  "Restaurante",
-  "Pousada",
-  "Cafeteria",
-  "Serviços",
-  "Beleza",
-  "Moda",
+  "restaurante",
+  "pousada",
+  "cafeteria",
+  "serviços",
+  "beleza",
+  "moda",
 ];
 
 const prices = ["R$", "R$$", "R$$$", "R$$$$"];

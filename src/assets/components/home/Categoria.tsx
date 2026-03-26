@@ -12,42 +12,50 @@ import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
-    name: "Restaurantes",
+    name: "restaurante",
+    label: "Restaurantes",
     description: "Almoço, jantar e experiências.",
     icon: UtensilsCrossed,
   },
   {
-    name: "Pousadas",
+    name: "pousada",
+    label: "Pousadas",
     description: "Hospedagens e descanso.",
     icon: Hotel,
   },
   {
-    name: "Cafeterias",
+    name: "cafeteria",
+    label: "Cafeterias",
     description: "Café, encontro e pausa.",
     icon: Coffee,
   },
   {
-    name: "Serviços",
+    name: "serviços",
+    label: "Serviços",
     description: "Profissionais e manutenção.",
     icon: Wrench,
   },
   {
-    name: "Beleza",
+    name: "beleza",
+    label: "Beleza",
     description: "Estética e cuidados pessoais.",
     icon: Scissors,
   },
   {
-    name: "Lojas",
+    name: "loja",
+    label: "Lojas",
     description: "Moda, presentes e variedades.",
     icon: ShoppingBag,
   },
   {
-    name: "Saúde",
+    name: "saúde",
+    label: "Saúde",
     description: "Clínicas e bem-estar.",
     icon: Stethoscope,
   },
   {
-    name: "Moda",
+    name: "moda",
+    label: "Moda",
     description: "Roupas e acessórios.",
     icon: Shirt,
   },
@@ -57,11 +65,7 @@ export default function Categoria() {
   const navigate = useNavigate();
 
   function handleCategoryClick(category: string) {
-    const params = new URLSearchParams();
-    params.set("q", category);
-    params.set("local", "Gravatá - PE");
-
-    navigate(`/resultados?${params.toString()}`);
+    navigate(`/resultados?q=${category}&local=Gravatá`);
   }
 
   return (
@@ -96,7 +100,7 @@ export default function Categoria() {
                 </div>
 
                 <h3 className="mt-4 text-base font-bold tracking-tight text-slate-900 md:text-lg">
-                  {category.name}
+                  {category.label}
                 </h3>
 
                 <p className="mt-2 text-xs leading-5 text-slate-600 md:text-sm">
