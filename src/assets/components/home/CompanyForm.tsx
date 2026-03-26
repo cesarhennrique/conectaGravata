@@ -17,15 +17,20 @@ export default function CompanyForm() {
   });
 
   function handleChange(
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) {
     const { name, value } = e.target;
 
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  }
+
+  function selectPlan(plan: "Básico" | "Pro" | "Premium") {
+    setFormData((prev) => ({
+      ...prev,
+      plan,
     }));
   }
 
@@ -42,8 +47,8 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
 *Categoria:* ${formData.category}
 *Responsável:* ${formData.responsibleName}
 *WhatsApp:* ${formData.whatsapp}
-*Instagram:* ${formData.instagram}
-*Endereço:* ${formData.address}
+*Instagram:* ${formData.instagram || "Não informado"}
+*Endereço:* ${formData.address || "Não informado"}
 *Descrição:* ${formData.description}
     `.trim();
 
@@ -54,30 +59,24 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
     window.open(url, "_blank");
   }
 
-  function selectPlan(plan: string) {
-    setFormData((prev) => ({
-      ...prev,
-      plan,
-    }));
-  }
-
   return (
     <section className="px-6 py-14 md:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 text-center">
-         
+          <span className="rounded-full bg-orange-50 px-4 py-1 text-sm font-medium text-orange-600">
+            Cadastro de empresa
+          </span>
 
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 md:text-5xl">
             Coloque sua empresa no Conecta Gravatá
           </h1>
 
           <p className="mx-auto mt-4 max-w-3xl text-slate-600">
-            Escolha o plano ideal para sua empresa ganhar visibilidade no portal
-            e preencher o cadastro para começar.
+            Escolha o plano ideal para destacar sua empresa no portal e preencha
+            o cadastro para começar a aparecer para moradores e turistas.
           </p>
         </div>
 
-        {/* PLANOS */}
         <div className="mb-10 grid gap-6 md:grid-cols-3">
           <button
             type="button"
@@ -90,12 +89,14 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
           >
             <h2 className="text-lg font-bold text-slate-900">Básico</h2>
             <p className="mt-2 text-sm text-slate-600">
-              Presença simples no portal.
+              Presença inicial no portal.
             </p>
+
             <p className="mt-5 text-3xl font-bold text-slate-900">
               R$29
               <span className="text-base font-medium text-slate-500">/mês</span>
             </p>
+
             <ul className="mt-5 space-y-2 text-sm text-slate-600">
               <li>✔ Nome da empresa</li>
               <li>✔ Categoria</li>
@@ -117,18 +118,20 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
           >
             <h2 className="text-lg font-bold text-slate-900">Pro</h2>
             <p className="mt-2 text-sm text-slate-600">
-              Mais visibilidade e destaque.
+              Mais visibilidade e perfil mais completo.
             </p>
+
             <p className="mt-5 text-3xl font-bold text-slate-900">
               R$59
               <span className="text-base font-medium text-slate-500">/mês</span>
             </p>
+
             <ul className="mt-5 space-y-2 text-sm text-slate-600">
               <li>✔ Tudo do plano Básico</li>
               <li>✔ Até 4 fotos da empresa</li>
               <li>✔ Descrição mais completa</li>
-              <li>✔ Maior visibilidade na listagem</li>
               <li>✔ Perfil mais atrativo no portal</li>
+              <li>✔ Mais visibilidade na listagem</li>
             </ul>
           </button>
 
@@ -147,13 +150,16 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
                 Destaque
               </span>
             </div>
+
             <p className="mt-2 text-sm text-slate-600">
               Máxima visibilidade no portal.
             </p>
+
             <p className="mt-5 text-3xl font-bold text-slate-900">
               R$99
               <span className="text-base font-medium text-slate-500">/mês</span>
             </p>
+
             <ul className="mt-5 space-y-2 text-sm text-slate-600">
               <li>✔ Tudo do plano Pro</li>
               <li>✔ Até 8 fotos da empresa</li>
@@ -165,7 +171,6 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
           </button>
         </div>
 
-        {/* FORMULÁRIO */}
         <form
           onSubmit={handleSubmit}
           className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
@@ -198,15 +203,14 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
                 required
               >
                 <option value="">Selecione</option>
-                <option>Restaurantes</option>
-                <option>Pousadas</option>
-                <option>Cafeterias</option>
+                <option>Restaurante</option>
+                <option>Pousada</option>
+                <option>Cafeteria</option>
                 <option>Serviços</option>
                 <option>Beleza</option>
-                <option>Lojas</option>
+                <option>Loja</option>
                 <option>Saúde</option>
                 <option>Moda</option>
-                <option>Prestadores</option>
               </select>
             </div>
 
