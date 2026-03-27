@@ -47,7 +47,7 @@ export default function FeaturedBusinesses() {
             return (
               <article
                 key={business.id}
-                className={`group overflow-hidden rounded-[28px] border bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(15,23,42,0.12)] ${
+                className={`group overflow-hidden rounded-[28px] border bg-white shadow-sm transition duration-300  ${
                   isPremium
                     ? "border-orange-300 shadow-[0_10px_40px_rgba(249,115,22,0.15)]"
                     : "border-slate-200"
@@ -57,7 +57,7 @@ export default function FeaturedBusinesses() {
                   <img
                     src={business.image}
                     alt={business.name}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover transition duration-500 "
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-slate-950/5 to-transparent" />
@@ -116,7 +116,7 @@ Gostaria de mais informações.
 
                         window.open(url, "_blank");
                       }}
-                      className="rounded-2xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                      className="rounded-2xl border bg-green-300 border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-green-400 cursor-pointer"
                     >
                       WhatsApp
                     </button>

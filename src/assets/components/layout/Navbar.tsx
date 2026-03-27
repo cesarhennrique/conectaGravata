@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <>
       {/* NAVBAR */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white backdrop-blur-md shadow-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
           
           {/* LOGO */}
@@ -51,28 +51,28 @@ export default function Navbar() {
           <nav className="hidden items-center gap-8 md:flex">
             <Link
               to="/"
-              className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+              className="text-sm font-medium text-slate-800 transition hover:text-orange-500"
             >
               Início
             </Link>
 
             <button
               onClick={() => goToSection("categorias")}
-              className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+              className="text-sm font-medium text-slate-800 transition hover:text-orange-500 cursor-pointer"
             >
               Categorias
             </button>
 
             <button
               onClick={() => goToSection("destaques")}
-              className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+              className="text-sm font-medium text-slate-800 transition hover:text-orange-500 cursor-pointer"
             >
               Destaques
             </button>
 
             <Link
               to="/prestadores"
-              className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+              className="text-sm font-medium text-slate-800 transition hover:text-orange-500"
             >
               Prestadores
             </Link>
@@ -82,7 +82,7 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 md:flex">
             <button
               onClick={handleSearchClick}
-              className="rounded-xl border border-slate-200 p-2 text-slate-600 transition hover:bg-slate-100"
+              className="rounded-xl border border-slate-200 p-2 text-slate-600 transition hover:bg-slate-100 cursor-pointer"
             >
               <Search className="h-5 w-5" />
             </button>

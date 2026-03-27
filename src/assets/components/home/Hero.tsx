@@ -57,8 +57,8 @@ export default function Hero() {
               Diretório premium de Gravatá
             </span>
 
-            <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-[0.95] tracking-[-0.05em] text-slate-900 md:text-6xl lg:text-7xl">
-              Descubra o melhor de Gravatá com mais praticidade
+            <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-[-0.05em] text-slate-900 md:text-6xl lg:text-7xl">
+              Descubra o melhor de <span className="text-orange-500">Gravatá</span> com mais praticidade
             </h1>
 
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 md:text-lg">
@@ -87,7 +87,7 @@ export default function Hero() {
 
                 <button
                   onClick={handleSearch}
-                  className="rounded-2xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+                  className="rounded-2xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600 cursor-pointer"
                 >
                   Buscar
                 </button>
@@ -100,7 +100,7 @@ export default function Hero() {
                 <button
                   key={item}
                   onClick={() => handleQuickCategory(item)}
-                  className="rounded-full border border-slate-200 bg-white/95 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600"
+                  className="rounded-full border border-slate-200 bg-white/95 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600 cursor-pointer"
                 >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </button>
