@@ -1,3 +1,15 @@
+export type DayKey = "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
+
+export type BusinessSchedule = Partial<
+  Record<
+    DayKey,
+    {
+      open: string;
+      close: string;
+    }
+  >
+>;
+
 export type Business = {
   id: number;
   name: string;
@@ -14,6 +26,72 @@ export type Business = {
   hours?: string;
   instagram?: string;
   gallery?: string[];
+  schedule?: BusinessSchedule;
+};
+
+const restaurantSchedule: BusinessSchedule = {
+  sun: { open: "11:30", close: "22:00" },
+  mon: { open: "11:30", close: "22:00" },
+  tue: { open: "11:30", close: "22:00" },
+  wed: { open: "11:30", close: "22:00" },
+  thu: { open: "11:30", close: "22:00" },
+  fri: { open: "11:30", close: "23:00" },
+  sat: { open: "11:30", close: "23:00" },
+};
+
+const pousada24h: BusinessSchedule = {
+  sun: { open: "00:00", close: "23:59" },
+  mon: { open: "00:00", close: "23:59" },
+  tue: { open: "00:00", close: "23:59" },
+  wed: { open: "00:00", close: "23:59" },
+  thu: { open: "00:00", close: "23:59" },
+  fri: { open: "00:00", close: "23:59" },
+  sat: { open: "00:00", close: "23:59" },
+};
+
+const cafeteriaSchedule: BusinessSchedule = {
+  mon: { open: "08:00", close: "19:00" },
+  tue: { open: "08:00", close: "19:00" },
+  wed: { open: "08:00", close: "19:00" },
+  thu: { open: "08:00", close: "19:00" },
+  fri: { open: "08:00", close: "19:00" },
+  sat: { open: "08:00", close: "19:00" },
+  sun: { open: "08:00", close: "13:00" },
+};
+
+const comercialSchedule: BusinessSchedule = {
+  mon: { open: "08:00", close: "18:00" },
+  tue: { open: "08:00", close: "18:00" },
+  wed: { open: "08:00", close: "18:00" },
+  thu: { open: "08:00", close: "18:00" },
+  fri: { open: "08:00", close: "18:00" },
+  sat: { open: "08:00", close: "13:00" },
+};
+
+const beautySchedule: BusinessSchedule = {
+  tue: { open: "09:00", close: "18:00" },
+  wed: { open: "09:00", close: "18:00" },
+  thu: { open: "09:00", close: "18:00" },
+  fri: { open: "09:00", close: "18:00" },
+  sat: { open: "09:00", close: "18:00" },
+};
+
+const retailSchedule: BusinessSchedule = {
+  mon: { open: "09:00", close: "18:00" },
+  tue: { open: "09:00", close: "18:00" },
+  wed: { open: "09:00", close: "18:00" },
+  thu: { open: "09:00", close: "18:00" },
+  fri: { open: "09:00", close: "18:00" },
+  sat: { open: "09:00", close: "18:00" },
+};
+
+const clinicSchedule: BusinessSchedule = {
+  mon: { open: "08:00", close: "17:00" },
+  tue: { open: "08:00", close: "17:00" },
+  wed: { open: "08:00", close: "17:00" },
+  thu: { open: "08:00", close: "17:00" },
+  fri: { open: "08:00", close: "17:00" },
+  sat: { open: "08:00", close: "12:00" },
 };
 
 export const businesses: Business[] = [
@@ -32,8 +110,9 @@ export const businesses: Business[] = [
     familyFriendly: true,
     plan: "premium",
     whatsapp: "5581991111111",
-    hours: "Seg a Dom • 12h às 22h",
+    hours: "Seg a Qui • 11h30 às 22h | Sex e Sáb • 11h30 às 23h | Dom • 11h30 às 22h",
     instagram: "@bistrodaserra",
+    schedule: restaurantSchedule,
     gallery: [
       "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200&auto=format&fit=crop",
@@ -57,6 +136,7 @@ export const businesses: Business[] = [
     whatsapp: "5581992222222",
     hours: "Recepção 24 horas",
     instagram: "@villagravata",
+    schedule: pousada24h,
     gallery: [
       "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop",
@@ -78,8 +158,9 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "premium",
     whatsapp: "5581993333333",
-    hours: "Seg a Sáb • 8h às 19h",
+    hours: "Seg a Sáb • 8h às 19h | Dom • 8h às 13h",
     instagram: "@cafedomirante",
+    schedule: cafeteriaSchedule,
     gallery: [
       "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1200&auto=format&fit=crop",
@@ -101,6 +182,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581994444444",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
   {
     id: 5,
@@ -117,6 +200,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "pro",
     whatsapp: "5581995555555",
+    hours: "Ter a Sáb • 9h às 18h",
+    schedule: beautySchedule,
   },
   {
     id: 6,
@@ -133,6 +218,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "pro",
     whatsapp: "5581996666666",
+    hours: "Seg a Sáb • 9h às 18h",
+    schedule: retailSchedule,
   },
   {
     id: 7,
@@ -149,6 +236,8 @@ export const businesses: Business[] = [
     familyFriendly: true,
     plan: "premium",
     whatsapp: "5581997777777",
+    hours: "Seg a Sex • 8h às 17h | Sáb • 8h às 12h",
+    schedule: clinicSchedule,
   },
   {
     id: 8,
@@ -165,6 +254,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581998888888",
+    hours: "Seg a Sáb • 9h às 18h",
+    schedule: retailSchedule,
   },
   {
     id: 9,
@@ -181,6 +272,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581991010101",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
   {
     id: 10,
@@ -197,6 +290,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581992020202",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
   {
     id: 11,
@@ -213,6 +308,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581993030303",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
   {
     id: 12,
@@ -229,6 +326,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581994040404",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
   {
     id: 13,
@@ -245,6 +344,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581995050505",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
   {
     id: 14,
@@ -261,6 +362,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581996060606",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
   {
     id: 15,
@@ -277,6 +380,8 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581997070707",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
   {
     id: 16,
@@ -293,5 +398,7 @@ export const businesses: Business[] = [
     familyFriendly: false,
     plan: "basic",
     whatsapp: "5581998080808",
+    hours: "Seg a Sáb • 8h às 18h",
+    schedule: comercialSchedule,
   },
 ];

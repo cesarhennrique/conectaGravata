@@ -10,6 +10,7 @@ type ResultCardProps = {
   description: string;
   plan: "premium" | "pro" | "basic";
   whatsapp: string;
+  isOpenNow: boolean;
 };
 
 export default function ResultCard({
@@ -21,6 +22,7 @@ export default function ResultCard({
   description,
   plan,
   whatsapp,
+  isOpenNow,
 }: ResultCardProps) {
   const isPremium = plan === "premium";
 
@@ -54,7 +56,9 @@ Gostaria de mais informações.
           <img
             src={image}
             alt={name}
-            className="h-full w-full object-cover"
+            className={`h-full w-full object-cover transition duration-300 ${
+              isOpenNow ? "" : "grayscale"
+            }`}
           />
 
           {isPremium && (
@@ -73,9 +77,26 @@ Gostaria de mais informações.
               </div>
             </div>
 
-            <div className="mt-3 flex items-center gap-2 text-sm text-slate-500">
-              <MapPin className="h-4 w-4" />
-              <span>{location}</span>
+            <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
+              <div className="flex items-center gap-2 text-slate-500">
+                <MapPin className="h-4 w-4" />
+                <span>{location}</span>
+              </div>
+
+              <div
+                className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${
+                  isOpenNow
+                    ? "bg-emerald-50 text-emerald-700"
+                    : "bg-red-50 text-red-700"
+                }`}
+              >
+                <span
+                  className={`h-2.5 w-2.5 rounded-full ${
+                    isOpenNow ? "bg-emerald-500" : "bg-red-500"
+                  }`}
+                />
+                {isOpenNow ? "Aberto agora" : "Fechado agora"}
+              </div>
             </div>
 
             <p className="mt-4 text-sm leading-6 text-slate-600">

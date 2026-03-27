@@ -9,17 +9,14 @@ const categories = [
   "moda",
 ];
 
-const prices = ["R$", "R$$", "R$$$", "R$$$$"];
-
 export default function FiltersSidebar() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const selectedCategory = searchParams.get("categoria") || "";
-  const selectedPrice = searchParams.get("preco") || "";
+
   const openNow = searchParams.get("aberto") === "true";
   const acceptCard = searchParams.get("cartao") === "true";
-  const familyFriendly = searchParams.get("familia") === "true";
 
   function updateParam(key: string, value: string | boolean) {
     const params = new URLSearchParams(searchParams);
@@ -74,32 +71,6 @@ export default function FiltersSidebar() {
         </div>
 
         <div className="mt-6">
-          <h3 className="text-sm font-semibold text-slate-900">
-            Faixa de preço
-          </h3>
-
-          <div className="mt-3 flex flex-wrap gap-2">
-            {prices.map((price) => {
-              const active = selectedPrice === price;
-
-              return (
-                <button
-                  key={price}
-                  onClick={() => updateParam("preco", active ? "" : price)}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
-                    active
-                      ? "border-orange-500 bg-orange-50 text-orange-600"
-                      : "border-slate-200 text-slate-700 hover:bg-slate-50"
-                  }`}
-                >
-                  {price}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="mt-6">
           <h3 className="text-sm font-semibold text-slate-900">Sugestões</h3>
 
           <div className="mt-3 space-y-3 text-sm text-slate-600">
@@ -121,16 +92,6 @@ export default function FiltersSidebar() {
                 className="rounded border-slate-300"
               />
               Aceita cartão
-            </label>
-
-            <label className="flex cursor-pointer items-center gap-2">
-              <input
-                type="checkbox"
-                checked={familyFriendly}
-                onChange={(e) => updateParam("familia", e.target.checked)}
-                className="rounded border-slate-300"
-              />
-              Bom para famílias
             </label>
           </div>
         </div>

@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 const categories = [
   {
     name: "restaurante",
-    label: "Restaurantes",
+    label: "Bares e Restaurantes",
     description: "Descubra opções para almoço, jantar e experiências especiais.",
     icon: UtensilsCrossed,
   },
