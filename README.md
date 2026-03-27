@@ -1,73 +1,112 @@
-# React + TypeScript + Vite
+# 🚀 Conecta Gravatá
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Plataforma digital para descobrir empresas, serviços e experiências em Gravatá - PE.
 
-Currently, two official plugins are available:
+O Conecta Gravatá conecta moradores e turistas aos melhores negócios locais, permitindo que empresas ganhem visibilidade e recebam contatos diretos via WhatsApp.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🔗 Acesse o projeto: https://www.conectagravata.com.br
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Funcionalidades
 
-## Expanding the ESLint configuration
+* 🔎 Busca de empresas por nome, categoria e localização
+* 🧭 Filtros inteligentes (categoria, preço, aberto, etc.)
+* ⭐ Empresas em destaque com maior visibilidade
+* 📍 Página de detalhes da empresa
+* 💬 Contato direto via WhatsApp
+* 📱 Interface responsiva (mobile-first)
+* 🧰 Área de cadastro para empresas com planos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 💰 Modelo de Negócio
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+O projeto utiliza um modelo de assinatura para empresas locais:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* **Básico (R$29/mês)**
+  Presença inicial no portal
+
+* **Pro (R$59/mês)**
+  Mais visibilidade e perfil completo
+
+* **Premium (R$99/mês)**
+  Destaque, prioridade e maior alcance
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+* React + TypeScript
+* Vite
+* Tailwind CSS
+* React Router DOM
+* Lucide Icons
+* Vercel (deploy)
+
+---
+
+## 📂 Estrutura do projeto
+
+```bash
+src/
+ ├── assets/
+ │   ├── components/
+ │   ├── pages/
+ │   ├── routes/
+ │   └── data/
+ ├── App.tsx
+ ├── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Como rodar o projeto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/conecta-gravata.git
+
+# Acesse a pasta
+cd conecta-gravata
+
+# Instale as dependências
+npm install
+
+# Rode o projeto
+npm run dev
 ```
+
+---
+
+## 🌐 Deploy
+
+O projeto está hospedado na Vercel:
+
+https://www.conectagravata.com.br
+
+---
+
+## 🎯 Objetivo do projeto
+
+Criar uma plataforma local escalável, ajudando pequenos e médios negócios a aumentarem sua presença digital e atraírem mais clientes.
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Cesar Henrique**
+
+* GitHub: https://github.com/cesarhennrique
+* LinkedIn: (https://www.linkedin.com/in/cesarhennrique/)
+
+---
+
+## 📌 Próximos passos
+
+* Sistema de favoritos ❤️
+* Painel para empresas gerenciarem seus dados
+* Integração com backend
+* Analytics de cliques e visualizações
+
+---
