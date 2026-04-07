@@ -65,9 +65,7 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
     <section className="px-6 py-14 md:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 text-center">
-          <span className="rounded-full border border-orange-200 bg-orange-50 px-4 py-1 text-sm font-medium text-orange-600">
-            Planos para empresas
-          </span>
+          
 
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 md:text-5xl">
             Faça sua empresa ser encontrada em Gravatá
@@ -96,7 +94,7 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
             </p>
 
             <p className="mt-5 text-3xl font-bold text-slate-900">
-              R$29
+              R$39
               <span className="text-base font-medium text-slate-500">/mês</span>
             </p>
 
@@ -168,7 +166,7 @@ Olá! Quero anunciar minha empresa no Conecta Gravatá.
             </p>
 
             <p className="mt-5 text-3xl font-bold text-slate-900">
-              R$99
+              R$129
               <span className="text-base font-medium text-slate-500">/mês</span>
             </p>
 

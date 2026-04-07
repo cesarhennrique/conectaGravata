@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -59,13 +59,10 @@ export default function Footer() {
                 <MapPin className="h-4 w-4" />
                 Gravatá - PE
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                (81) 99999-9999
-              </li>
+              
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                contato@conectagravata.com
+                conectagravata@gmail.com
               </li>
             </ul>
           </div>
