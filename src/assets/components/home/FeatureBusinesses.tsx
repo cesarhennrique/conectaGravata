@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { businesses } from "../../../data/businesses";
 
 const featuredBusinesses = businesses
-  .filter((business) => business.plan === "premium" || business.plan === "pro")
+  .filter((business) => business.plan === "premium" )
   .slice(0, 8);
 
 export default function FeaturedBusinesses() {
@@ -18,7 +18,7 @@ export default function FeaturedBusinesses() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <span className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm font-medium text-orange-600">
-              Destaques do portal
+              Destaques em Gravatá
             </span>
 
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">

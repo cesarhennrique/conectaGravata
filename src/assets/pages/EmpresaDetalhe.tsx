@@ -135,9 +135,7 @@ Gostaria de mais informações.
                   Chamar no WhatsApp
                 </button>
 
-                <button className="rounded-2xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
-                  Ver no mapa
-                </button>
+              
               </div>
 
               {isPremium && (
