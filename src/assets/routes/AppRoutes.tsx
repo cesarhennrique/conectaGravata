@@ -5,17 +5,21 @@ import Resultados from "../pages/Resultados";
 import EmpresaDetalhe from "../pages/EmpresaDetalhe";
 import Prestadores from "../pages/Prestadores";
 import Footer from "../components/layout/Footer";
+import ScrollToTop from "../components/ScrollToTop";
 
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <>
+        <ScrollToTop />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cadastro-empresa" element={<CadastroEmpresa />} />
           <Route path="/resultados" element={<Resultados />} />
           <Route path="/empresa/:id" element={<EmpresaDetalhe />} />
           <Route path="/prestadores" element={<Prestadores />} />
+          
         </Routes>
 
         <Footer />
