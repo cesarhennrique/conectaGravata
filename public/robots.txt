@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /empresa/
+
+Sitemap: https://www.conectagravata.com.br/sitemap.xml
