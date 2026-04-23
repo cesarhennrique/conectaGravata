@@ -68,8 +68,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-slate-200 pt-6 text-center text-sm text-slate-500">
+        <div className="flex justify-between mt-10 border-t border-slate-200 pt-6 text-center text-sm text-slate-500">
           © {new Date().getFullYear()} Conecta Gravatá. Todos os direitos reservados.
+          <div>
+            <p>Desenvolvido por Urbixy</p>
+          </div>
         </div>
       </div>
     </footer>

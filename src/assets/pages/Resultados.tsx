@@ -1,10 +1,15 @@
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import ResultsSearchBar from "../components/results/ResultsSearchBar";
 import FiltersSidebar from "../components/results/FiltersSidebar";
 import ResultCard from "../components/results/ResultCard";
-import { useSearchParams } from "react-router-dom";
-import { businesses } from "../../data/businesses";
-import { isBusinessOpenNow } from "../shared/businessHours";
+import { supabase } from "../../lib/supabase";
+import {
+  mapSupabaseBusiness,
+  type PublicBusiness,
+} from "../shared/businessMapper";
+import { isPublicBusinessOpenNow } from "../shared/publicBusinessHours";
 
 function normalize(text: string) {
   return text
@@ -22,6 +27,9 @@ const planOrder: Record<"premium" | "pro" | "basic", number> = {
 export default function Resultados() {
   const [searchParams] = useSearchParams();
 
+  const [businesses, setBusinesses] = useState<PublicBusiness[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const query = searchParams.get("q") || "";
   const local = searchParams.get("local") || "Gravatá - PE";
   const selectedCategory = searchParams.get("categoria") || "";
@@ -30,38 +38,81 @@ export default function Resultados() {
   const acceptCard = searchParams.get("cartao") === "true";
   const familyFriendly = searchParams.get("familia") === "true";
 
-  const normalizedQuery = normalize(query.trim());
+  useEffect(() => {
+    async function loadBusinesses() {
+      setLoading(true);
 
-  const filteredBusinesses = businesses
-    .filter((business) => {
-      const matchesQuery =
-        !normalizedQuery ||
-        normalize(business.name).includes(normalizedQuery) ||
-        normalize(business.category).includes(normalizedQuery) ||
-        normalize(business.location).includes(normalizedQuery) ||
-        normalize(business.description).includes(normalizedQuery);
+      const { data, error } = await supabase
+        .from("businesses")
+        .select("*")
+        .eq("status", "active")
+        .order("created_at", { ascending: false });
 
-      const matchesCategory =
-        !selectedCategory ||
-        normalize(business.category).includes(normalize(selectedCategory));
+      if (error) {
+        console.error("Erro ao carregar empresas:", error);
+        setBusinesses([]);
+        setLoading(false);
+        return;
+      }
 
-      const matchesPrice =
-        !selectedPrice || business.priceLevel === selectedPrice;
+      const mapped = (data || []).map(mapSupabaseBusiness);
+      setBusinesses(mapped);
+      setLoading(false);
+    }
 
-      const matchesOpen = !openNow || isBusinessOpenNow(business);
-      const matchesCard = !acceptCard || business.card;
-      const matchesFamily = !familyFriendly || business.familyFriendly;
+    loadBusinesses();
+  }, []);
 
-      return (
-        matchesQuery &&
-        matchesCategory &&
-        matchesPrice &&
-        matchesOpen &&
-        matchesCard &&
-        matchesFamily
-      );
-    })
-    .sort((a, b) => planOrder[a.plan] - planOrder[b.plan]);
+  const filteredBusinesses = useMemo(() => {
+    const normalizedQuery = normalize(query.trim());
+
+    return businesses
+      .filter((business) => {
+        const matchesQuery =
+          !normalizedQuery ||
+          normalize(business.name).includes(normalizedQuery) ||
+          normalize(business.category).includes(normalizedQuery) ||
+          normalize(business.location).includes(normalizedQuery) ||
+          normalize(business.description).includes(normalizedQuery);
+
+        const matchesCategory =
+          !selectedCategory ||
+          normalize(business.category).includes(normalize(selectedCategory));
+
+        const matchesPrice =
+          !selectedPrice || business.priceLevel === selectedPrice;
+
+        const matchesOpen = !openNow || isPublicBusinessOpenNow(business);
+
+        // temporários até termos esses campos estruturados no banco
+        const matchesCard = !acceptCard || true;
+        const matchesFamily = !familyFriendly || true;
+
+        return (
+          matchesQuery &&
+          matchesCategory &&
+          matchesPrice &&
+          matchesOpen &&
+          matchesCard &&
+          matchesFamily
+        );
+      })
+      .sort((a, b) => {
+        if (a.featured !== b.featured) {
+          return a.featured ? -1 : 1;
+        }
+
+        return planOrder[a.plan] - planOrder[b.plan];
+      });
+  }, [
+    businesses,
+    query,
+    selectedCategory,
+    selectedPrice,
+    openNow,
+    acceptCard,
+    familyFriendly,
+  ]);
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -80,9 +131,11 @@ export default function Resultados() {
                 </h1>
 
                 <p className="mt-1 text-sm text-slate-600">
-                  {filteredBusinesses.length} resultado
-                  {filteredBusinesses.length !== 1 ? "s" : ""} encontrado
-                  {filteredBusinesses.length !== 1 ? "s" : ""}
+                  {loading
+                    ? "Carregando resultados..."
+                    : `${filteredBusinesses.length} resultado${
+                        filteredBusinesses.length !== 1 ? "s" : ""
+                      } encontrado${filteredBusinesses.length !== 1 ? "s" : ""}`}
                 </p>
               </div>
 
@@ -91,7 +144,11 @@ export default function Resultados() {
               </button>
             </div>
 
-            {filteredBusinesses.length > 0 ? (
+            {loading ? (
+              <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+                <p className="text-sm text-slate-600">Carregando empresas...</p>
+              </div>
+            ) : filteredBusinesses.length > 0 ? (
               <div className="space-y-5">
                 {filteredBusinesses.map((business) => (
                   <ResultCard
@@ -104,7 +161,7 @@ export default function Resultados() {
                     description={business.description}
                     plan={business.plan}
                     whatsapp={business.whatsapp}
-                    isOpenNow={isBusinessOpenNow(business)}
+                    isOpenNow={isPublicBusinessOpenNow(business)}
                   />
                 ))}
               </div>

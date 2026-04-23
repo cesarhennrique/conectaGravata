@@ -1,12 +1,60 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
-import { MapPin, Clock, Phone, MessageCircle, AtSign } from "lucide-react";
-import { businesses } from "../../data/businesses";
+import {
+  MapPin,
+  Clock,
+  Phone,
+  MessageCircle,
+  AtSign,
+} from "lucide-react";
+import { supabase } from "../../lib/supabase";
+import {
+  mapSupabaseBusiness,
+  type PublicBusiness,
+} from "../shared/businessMapper";
+import { isPublicBusinessOpenNow } from "../shared/publicBusinessHours";
 
 export default function EmpresaDetalhe() {
   const { id } = useParams();
+  const [business, setBusiness] = useState<PublicBusiness | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const business = businesses.find((item) => item.id === Number(id));
+  useEffect(() => {
+    async function loadBusiness() {
+      if (!id) return;
+
+      setLoading(true);
+
+      const { data, error } = await supabase
+        .from("businesses")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (error || !data) {
+        setBusiness(null);
+        setLoading(false);
+        return;
+      }
+
+      setBusiness(mapSupabaseBusiness(data));
+      setLoading(false);
+    }
+
+    loadBusiness();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-slate-50 text-slate-900">
+        <Navbar />
+        <div className="mx-auto max-w-4xl px-6 py-20 text-center">
+          <p className="text-slate-600">Carregando empresa...</p>
+        </div>
+      </main>
+    );
+  }
 
   if (!business) {
     return (
@@ -23,11 +71,10 @@ export default function EmpresaDetalhe() {
   }
 
   const isPremium = business.plan === "premium";
+  const isOpenNow = isPublicBusinessOpenNow(business);
 
-function handleWhatsAppClick() {
-  if (!business) return;
-
-  const mensagem = `
+  function handleWhatsAppClick() {
+    const mensagem = `
 Olá! Encontrei sua empresa no Conecta Gravatá.
 
 *Empresa:* ${business.name}
@@ -35,14 +82,14 @@ Olá! Encontrei sua empresa no Conecta Gravatá.
 *Local:* ${business.location}
 
 Gostaria de mais informações.
-  `.trim();
+    `.trim();
 
-  const url = `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
-    mensagem
-  )}`;
+    const url = `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
+      mensagem
+    )}`;
 
-  window.open(url, "_blank");
-}
+    window.open(url, "_blank");
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -56,7 +103,9 @@ Gostaria de mais informações.
                 <img
                   src={business.image}
                   alt={business.name}
-                  className="h-[320px] w-full object-cover md:h-[460px]"
+                  className={`h-[320px] w-full object-cover md:h-[460px] ${
+                    isOpenNow ? "" : "grayscale"
+                  }`}
                 />
 
                 {isPremium && (
@@ -89,6 +138,21 @@ Gostaria de mais informações.
                   )}
                 </div>
 
+                <div
+                  className={`mt-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${
+                    isOpenNow
+                      ? "bg-emerald-50 text-emerald-700"
+                      : "bg-red-50 text-red-700"
+                  }`}
+                >
+                  <span
+                    className={`h-2.5 w-2.5 rounded-full ${
+                      isOpenNow ? "bg-emerald-500" : "bg-red-500"
+                    }`}
+                  />
+                  {isOpenNow ? "Aberto agora" : "Fechado agora"}
+                </div>
+
                 <p className="mt-6 max-w-3xl text-base leading-8 text-slate-600">
                   {business.description}
                 </p>
@@ -101,10 +165,12 @@ Gostaria de mais informações.
               </h2>
 
               <div className="mt-6 space-y-4 text-sm text-slate-600">
-                <div className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-slate-500" />
-                  <span>{business.whatsapp}</span>
-                </div>
+                {business.whatsapp && (
+                  <div className="flex items-center gap-3">
+                    <Phone className="h-4 w-4 text-slate-500" />
+                    <span>{business.whatsapp}</span>
+                  </div>
+                )}
 
                 {business.instagram && (
                   <div className="flex items-center gap-3">
@@ -135,7 +201,9 @@ Gostaria de mais informações.
                   Chamar no WhatsApp
                 </button>
 
-              
+                <button className="rounded-2xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                  Ver no mapa
+                </button>
               </div>
 
               {isPremium && (
@@ -151,29 +219,6 @@ Gostaria de mais informações.
               )}
             </aside>
           </div>
-
-          {business.gallery && business.gallery.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
-                Fotos e ambiente
-              </h2>
-
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {business.gallery.map((image, index) => (
-                  <div
-                    key={index}
-                    className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm"
-                  >
-                    <img
-                      src={image}
-                      alt={`${business.name} ${index + 1}`}
-                      className="h-64 w-full object-cover transition duration-300 hover:scale-105"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </section>
     </main>
