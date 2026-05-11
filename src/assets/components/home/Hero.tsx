@@ -30,6 +30,7 @@ export default function Hero() {
       {/* FUNDO MOBILE */}
       <div className="absolute inset-0 lg:hidden">
   <picture>
+    <source srcSet="/hero-gravata-mobile.webp" media="(max-width: 1023px)" type="image/webp" />
     <source srcSet="/hero-gravata.webp" type="image/webp" />
     <img
       src="/hero-gravata.png"
