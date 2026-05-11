@@ -33,6 +33,10 @@ export default function Hero() {
     src="/hero-gravata.png"
     alt="Vista de Gravatá"
     className="h-full w-full object-cover object-center opacity-50"
+    fetchpriority="high"
+    decoding="async"
+    width="800"
+    height="600"
   />
 
   <div className="absolute inset-0 bg-gradient-to-b from-white/ via-white/10 to-[#f8fafc]" />
@@ -45,6 +49,10 @@ export default function Hero() {
           src="/hero-gravata.png"
           alt="Vista de Gravatá"
           className="h-full w-full object-cover object-center"
+          fetchpriority="high"
+          decoding="async"
+          width="1400"
+          height="900"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#f8fafc] via-[#f8fafc]/75 via-[20%] to-transparent" />
       </div>

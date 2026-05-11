@@ -42,6 +42,9 @@ export default function Navbar() {
               src="/logo.png"
               alt="Conecta Gravatá"
               className="h-10 w-auto md:h-12"
+              width="120"
+              height="48"
+              decoding="async"
             />
           </Link>
 
