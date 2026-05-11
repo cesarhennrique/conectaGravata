@@ -19,16 +19,14 @@ export default function Navbar() {
   function goToSection(sectionId: string) {
     closeMenu();
 
-    // Se não estiver na home, navega primeiro
     if (location.pathname !== "/") {
       navigate(`/#${sectionId}`);
       return;
     }
 
-    // Se já estiver na home, faz scroll
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
   }
 
