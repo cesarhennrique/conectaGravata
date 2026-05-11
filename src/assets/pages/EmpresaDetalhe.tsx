@@ -13,7 +13,7 @@ import {
   mapSupabaseBusiness,
   type PublicBusiness,
 } from "../shared/businessMapper";
-import { isPublicBusinessOpenNow } from "../shared/publicBusinessHours";
+import { isPublicBusinessOpenNow, formatHoursSlots } from "../shared/publicBusinessHours";
 
 export default function EmpresaDetalhe() {
   const { id } = useParams();
@@ -146,9 +146,9 @@ Gostaria de mais informações.
                   </div>
 
                   {business.hours && (
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4" />
-                      <span>{business.hours}</span>
+                    <div className="flex items-start gap-2">
+                      <Clock className="mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{formatHoursSlots(business.hours).map(s => `${s.days}: ${s.time}`).join(" · ")}</span>
                     </div>
                   )}
                 </div>
@@ -200,9 +200,16 @@ Gostaria de mais informações.
                 </div>
 
                 {business.hours && (
-                  <div className="flex items-center gap-3">
-                    <Clock className="h-4 w-4 text-slate-500" />
-                    <span>{business.hours}</span>
+                  <div className="flex items-start gap-3">
+                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
+                    <div className="space-y-1">
+                      {formatHoursSlots(business.hours).map((s, i) => (
+                        <div key={i} className="flex items-center justify-between gap-4 text-sm">
+                          <span className="font-medium text-slate-700">{s.days}</span>
+                          <span className={s.closed ? "text-red-500" : "text-slate-600"}>{s.time}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

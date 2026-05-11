@@ -12,6 +12,7 @@ import {
   ImageIcon,
   ChevronRight,
 } from "lucide-react";
+import HoursEditor from "../components/admin/HoursEditor";
 
 type Plan = "basic" | "pro" | "premium";
 
@@ -377,13 +378,9 @@ export default function AdminCompanyForm() {
             {plan !== "basic" && (
               <div className="md:col-span-2">
                 <label className="mb-2 block text-sm font-medium text-slate-700">Horário de funcionamento</label>
-                <input
-                  type="text"
-                  name="hours_text"
+                <HoursEditor
                   value={formData.hours_text}
-                  onChange={handleChange}
-                  placeholder="Ex: Seg a Sáb • 8h às 18h"
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                  onChange={(json) => setFormData((prev) => ({ ...prev, hours_text: json }))}
                 />
               </div>
             )}

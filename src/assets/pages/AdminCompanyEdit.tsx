@@ -2,6 +2,7 @@ import { type FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminLayout from "../components/admin/AdminLayout";
 import { supabase } from "../../lib/supabase";
+import HoursEditor from "../components/admin/HoursEditor";
 
 export default function AdminCompanyEdit() {
   const { id } = useParams();
@@ -296,12 +297,9 @@ export default function AdminCompanyEdit() {
             <label className="mb-2 block text-sm font-medium text-slate-700">
               Horário de funcionamento
             </label>
-            <input
-              type="text"
-              name="hours_text"
+            <HoursEditor
               value={formData.hours_text}
-              onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              onChange={(json) => setFormData((prev) => ({ ...prev, hours_text: json }))}
             />
           </div>
 
