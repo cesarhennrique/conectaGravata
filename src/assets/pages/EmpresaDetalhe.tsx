@@ -116,6 +116,20 @@ Gostaria de mais informações.
                 )}
               </div>
 
+              {business.gallery.length > 1 && (
+                <div className="mt-3 grid grid-cols-3 gap-3">
+                  {business.gallery.slice(1).map((url, i) => (
+                    <div key={i} className="overflow-hidden rounded-2xl">
+                      <img
+                        src={url}
+                        alt={`${business.name} ${i + 2}`}
+                        className="h-28 w-full object-cover transition hover:scale-105"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <div className="mt-6">
                 <p className="text-sm font-medium text-slate-500">
                   {business.category}
