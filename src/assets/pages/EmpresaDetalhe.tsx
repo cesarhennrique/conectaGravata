@@ -74,6 +74,7 @@ export default function EmpresaDetalhe() {
   const isOpenNow = isPublicBusinessOpenNow(business);
 
   function handleWhatsAppClick() {
+    if (!business) return;
     const mensagem = `
 Olá! Encontrei sua empresa no Conecta Gravatá.
 
