@@ -170,7 +170,7 @@ export default function AdminCompanyForm() {
         due_date: formData.due_date || null,
         instagram: plan === "basic" ? null : formData.instagram || null,
         hours_text: plan === "basic" ? null : formData.hours_text || null,
-        featured: plan === "premium" ? formData.featured : false,
+        featured: plan === "premium",
         price_level: plan === "premium" ? formData.price_level : "R$",
         image_url: imageUrls.length > 0
           ? imageUrls.length === 1
@@ -491,22 +491,18 @@ export default function AdminCompanyForm() {
               </div>
             )}
 
-            {/* Destaque — apenas Premium */}
+            {/* Destaque automático no Premium */}
             {plan === "premium" && (
               <div className="md:col-span-2">
-                <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-4">
-                  <input
-                    type="checkbox"
-                    name="featured"
-                    checked={formData.featured}
-                    onChange={handleChange}
-                    className="h-4 w-4 accent-orange-500"
-                  />
-                  <div>
-                    <p className="text-sm font-semibold text-amber-800">Empresa em destaque</p>
-                    <p className="text-xs text-amber-600">Aparece com badge especial e maior visibilidade no portal</p>
+                <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-4">
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-400">
+                    <Check className="h-3 w-3 text-white" />
                   </div>
-                </label>
+                  <div>
+                    <p className="text-sm font-semibold text-amber-800">Destaque incluído automaticamente</p>
+                    <p className="text-xs text-amber-600">Empresas Premium já recebem o selo de destaque no portal</p>
+                  </div>
+                </div>
               </div>
             )}
 
