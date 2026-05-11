@@ -29,17 +29,20 @@ export default function Hero() {
     <section className="relative overflow-hidden bg-white">
       {/* FUNDO MOBILE */}
       <div className="absolute inset-0 lg:hidden">
-  <img
-    src="/hero-gravata.png"
-    alt="Vista de Gravatá"
-    className="h-full w-full object-cover object-center opacity-50"
-    fetchpriority="high"
-    decoding="async"
-    width="800"
-    height="600"
-  />
+  <picture>
+    <source srcSet="/hero-gravata.webp" type="image/webp" />
+    <img
+      src="/hero-gravata.png"
+      alt="Vista de Gravatá"
+      className="h-full w-full object-cover object-center opacity-50"
+      fetchpriority="high"
+      decoding="async"
+      width="800"
+      height="600"
+    />
+  </picture>
 
-  <div className="absolute inset-0 bg-gradient-to-b from-white/ via-white/10 to-[#f8fafc]" />
+  <div className="absolute inset-0 bg-linear-to-b from-white/ via-white/10 to-[#f8fafc]" />
   <div className="absolute inset-0 bg-orange-30/20" />
 </div>
 
@@ -54,12 +57,12 @@ export default function Hero() {
           width="1400"
           height="900"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#f8fafc] via-[#f8fafc]/75 via-[20%] to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#f8fafc] via-[#f8fafc]/75 via-20% to-transparent" />
       </div>
 
       {/* CONTEÚDO */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 md:py-20">
-        <div className="flex min-h-[560px] items-center lg:min-h-[700px]">
+        <div className="flex min-h-140 items-center lg:min-h-175">
           <div className="max-w-3xl text-center lg:text-left">
             <span className="inline-flex rounded-full border border-orange-200 bg-white/90 px-4 py-1.5 text-sm font-medium text-orange-600 shadow-sm backdrop-blur-sm">
               Diretório premium de Gravatá
@@ -77,7 +80,7 @@ export default function Hero() {
 
             {/* BUSCA */}
             <div className="mt-8 w-full max-w-2xl rounded-[30px] border border-slate-200 bg-white/95 p-2 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur-sm">
-              <div className="flex items-center gap-3 rounded-[24px] px-3 py-2">
+              <div className="flex items-center gap-3 rounded-3xl px-3 py-2">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-orange-500">
                   <Search className="h-5 w-5" />
                 </div>
