@@ -48,15 +48,18 @@ export default function Hero() {
 
       {/* IMAGEM DESKTOP */}
       <div className="absolute inset-y-0 right-0 hidden w-[68%] lg:block">
-        <img
-          src="/hero-gravata.png"
-          alt="Vista de Gravatá"
-          className="h-full w-full object-cover object-center"
-          fetchpriority="high"
-          decoding="async"
-          width="1400"
-          height="900"
-        />
+        <picture>
+          <source srcSet="/hero-gravata.webp" type="image/webp" />
+          <img
+            src="/hero-gravata.png"
+            alt="Vista de Gravatá"
+            className="h-full w-full object-cover object-center"
+            fetchpriority="high"
+            decoding="async"
+            width="1400"
+            height="900"
+          />
+        </picture>
         <div className="absolute inset-0 bg-linear-to-r from-[#f8fafc] via-[#f8fafc]/75 via-20% to-transparent" />
       </div>
 
