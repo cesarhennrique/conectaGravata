@@ -13,6 +13,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import HoursEditor from "../components/admin/HoursEditor";
+import { CATEGORIES } from "../shared/categories";
 
 type Plan = "basic" | "pro" | "premium";
 
@@ -312,9 +313,7 @@ export default function AdminCompanyForm() {
                 required
               >
                 <option value="">Selecione...</option>
-                {["Alimentação", "Saúde", "Educação", "Serviços", "Comércio", "Turismo", "Outros"].map(
-                  (c) => <option key={c} value={c}>{c}</option>
-                )}
+                {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
 

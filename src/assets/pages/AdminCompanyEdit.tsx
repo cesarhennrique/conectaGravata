@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import AdminLayout from "../components/admin/AdminLayout";
 import { supabase } from "../../lib/supabase";
 import HoursEditor from "../components/admin/HoursEditor";
+import { CATEGORIES } from "../shared/categories";
 
 export default function AdminCompanyEdit() {
   const { id } = useParams();
@@ -153,14 +154,16 @@ export default function AdminCompanyEdit() {
             <label className="mb-2 block text-sm font-medium text-slate-700">
               Categoria
             </label>
-            <input
-              type="text"
+            <select
               name="category"
               value={formData.category}
               onChange={handleChange}
               className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
               required
-            />
+            >
+              <option value="">Selecione...</option>
+              {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+            </select>
           </div>
 
           <div>

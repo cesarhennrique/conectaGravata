@@ -1,13 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { CATEGORIES } from "../../shared/categories";
 
-const categories = [
-  "restaurante",
-  "pousada",
-  "cafeteria",
-  "serviços",
-  "beleza",
-  "moda",
-];
+const categories = CATEGORIES.map((c) => c.toLowerCase());
 
 export default function FiltersSidebar() {
   const [searchParams] = useSearchParams();
