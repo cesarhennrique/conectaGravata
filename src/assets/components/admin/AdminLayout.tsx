@@ -1,16 +1,27 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Building2, LayoutDashboard, LogOut } from "lucide-react";
+import {
+  Building2,
+  LayoutDashboard,
+  LogOut,
+  Bell,
+  Search,
+  ChevronDown,
+  Settings,
+  Moon,
+  Sun,
+} from "lucide-react";
 import { supabase } from "../../../lib/supabase";
+import { useState } from "react";
 
 type AdminLayoutProps = {
   title: string;
-  subtitle?: string;
   children: React.ReactNode;
 };
 
-export default function AdminLayout({ title, subtitle, children }: AdminLayoutProps) {
+export default function AdminLayout({ title, children }: AdminLayoutProps) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [dark, setDark] = useState(false);
 
   async function handleLogout() {
     await supabase.auth.signOut();
@@ -18,59 +29,118 @@ export default function AdminLayout({ title, subtitle, children }: AdminLayoutPr
   }
 
   const navItems = [
-    { to: "/admin", icon: LayoutDashboard, label: "Dashboard" },
+    { to: "/admin", icon: LayoutDashboard, label: "Overview" },
     { to: "/admin/empresas", icon: Building2, label: "Empresas" },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900">
-      <div className="grid min-h-screen md:grid-cols-[260px_1fr]">
-        <aside className="flex flex-col bg-slate-900 p-6">
-          <Link to="/admin" className="block">
-            <h2 className="text-xl font-bold text-white">
-              Conecta <span className="text-orange-400">Gravatá</span>
-            </h2>
-            <p className="mt-1 text-xs font-medium uppercase tracking-widest text-slate-400">
-              Painel administrativo
-            </p>
+    <div className={`min-h-screen ${dark ? "bg-zinc-950 text-white" : "bg-[#f4f4f5] text-slate-900"}`}>
+      {/* Top bar */}
+      <header className={`sticky top-0 z-10 flex h-16 items-center justify-between border-b px-6 ${dark ? "border-zinc-800 bg-zinc-900" : "border-slate-200 bg-white"}`}>
+        {/* Logo + nav */}
+        <div className="flex items-center gap-8">
+          <Link to="/admin" className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500 text-white font-bold text-sm">CG</div>
+            <span className={`text-sm font-bold ${dark ? "text-white" : "text-slate-900"}`}>Conecta Gravatá</span>
           </Link>
 
-          <nav className="mt-10 flex-1 space-y-1">
-            {navItems.map(({ to, icon: Icon, label }) => {
+          <nav className="hidden items-center gap-1 md:flex">
+            {navItems.map(({ to, label }) => {
               const active = pathname === to;
               return (
                 <Link
                   key={to}
                   to={to}
-                  className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
+                  className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
                     active
-                      ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
-                      : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                      ? "bg-slate-900 text-white"
+                      : dark
+                      ? "text-zinc-400 hover:text-white"
+                      : "text-slate-500 hover:text-slate-900"
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
                   {label}
                 </Link>
               );
             })}
           </nav>
+        </div>
+
+        {/* Right actions */}
+        <div className="flex items-center gap-3">
+          <button className={`hidden items-center gap-2 rounded-full border px-3 py-1.5 text-sm md:flex ${dark ? "border-zinc-700 text-zinc-400" : "border-slate-200 text-slate-400"}`}>
+            <Search className="h-3.5 w-3.5" />
+            Buscar...
+          </button>
+
+          <button
+            onClick={() => setDark(!dark)}
+            className={`rounded-full p-2 ${dark ? "bg-zinc-800 text-zinc-300" : "bg-slate-100 text-slate-500"}`}
+          >
+            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+
+          <button className={`relative rounded-full p-2 ${dark ? "bg-zinc-800 text-zinc-300" : "bg-slate-100 text-slate-500"}`}>
+            <Bell className="h-4 w-4" />
+            <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-orange-500" />
+          </button>
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-400 transition hover:bg-slate-800 hover:text-white"
+            className="flex items-center gap-2 rounded-full bg-slate-900 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-slate-700"
           >
-            <LogOut className="h-4 w-4" />
-            Sair
+            Admin
+            <ChevronDown className="h-3.5 w-3.5" />
           </button>
+        </div>
+      </header>
+
+      <div className="flex min-h-[calc(100vh-64px)]">
+        {/* Sidebar */}
+        <aside className={`hidden w-16 flex-col items-center gap-4 border-r py-6 md:flex ${dark ? "border-zinc-800 bg-zinc-900" : "border-slate-200 bg-white"}`}>
+          {navItems.map(({ to, icon: Icon, label }) => {
+            const active = pathname === to;
+            return (
+              <Link
+                key={to}
+                to={to}
+                title={label}
+                className={`flex h-10 w-10 items-center justify-center rounded-xl transition ${
+                  active
+                    ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
+                    : dark
+                    ? "text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                    : "text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                }`}
+              >
+                <Icon className="h-5 w-5" />
+              </Link>
+            );
+          })}
+
+          <div className="mt-auto flex flex-col gap-4">
+            <button
+              title="Configurações"
+              className={`flex h-10 w-10 items-center justify-center rounded-xl transition ${dark ? "text-zinc-400 hover:bg-zinc-800 hover:text-white" : "text-slate-400 hover:bg-slate-100"}`}
+            >
+              <Settings className="h-5 w-5" />
+            </button>
+            <button
+              onClick={handleLogout}
+              title="Sair"
+              className={`flex h-10 w-10 items-center justify-center rounded-xl transition ${dark ? "text-zinc-400 hover:bg-zinc-800 hover:text-white" : "text-slate-400 hover:bg-slate-100"}`}
+            >
+              <LogOut className="h-5 w-5" />
+            </button>
+          </div>
         </aside>
 
-        <main className="flex flex-col">
-          <header className="border-b border-slate-200 bg-white px-8 py-5 shadow-sm">
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">{title}</h1>
-            {subtitle && <p className="mt-1 text-sm text-slate-500">{subtitle}</p>}
-          </header>
-
-          <div className="flex-1 p-6 md:p-8">{children}</div>
+        {/* Content */}
+        <main className="flex-1 overflow-auto p-6 md:p-8">
+          <div className="mb-6">
+            <h1 className={`text-2xl font-bold tracking-tight ${dark ? "text-white" : "text-slate-900"}`}>{title}</h1>
+          </div>
+          {children}
         </main>
       </div>
     </div>
