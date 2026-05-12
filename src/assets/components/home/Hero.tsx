@@ -1,130 +1,131 @@
-import { Search } from "lucide-react";
+import { Search, MapPin, LayoutGrid, UtensilsCrossed, ShoppingBag, Hotel, Landmark } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const quickCategories = [
-  "restaurante",
-  "pousada",
-  "cafeteria",
-  "serviços",
-  "beleza",
+const chips = [
+  { label: "Restaurante", icon: UtensilsCrossed, value: "restaurante" },
+  { label: "Lojas",       icon: ShoppingBag,    value: "loja"        },
+  { label: "Pousadas",    icon: Hotel,           value: "pousada"     },
+  { label: "Turismo",     icon: Landmark,        value: "turismo"     },
 ];
 
+const categoryOptions = [
+  "Restaurante","Pousada","Cafeteria","Loja","Beleza",
+  "Saúde","Serviços","Moda","Automotivo","Academia","Educação","Turismo",
+];
 
 export default function Hero() {
-  const [search, setSearch] = useState("");
+  const [keyword, setKeyword]   = useState("");
+  const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
   function handleSearch() {
-    if (!search.trim()) return;
-
-    navigate(`/resultados?q=${search}&local=Gravatá`);
-  }
-
-  function handleQuickCategory(item: string) {
-    navigate(`/resultados?q=${item}&local=Gravatá`);
+    const q = keyword.trim() || category.toLowerCase();
+    navigate(q ? `/resultados?q=${q}&local=Gravatá` : "/resultados?local=Gravatá");
   }
 
   return (
-    <section className="relative overflow-hidden bg-white">
-      {/* FUNDO MOBILE */}
-      <div className="absolute inset-0 lg:hidden">
-  <picture>
-    <source srcSet="/hero-gravata-mobile.webp" media="(max-width: 1023px)" type="image/webp" />
-    <source srcSet="/hero-gravata.webp" type="image/webp" />
-    <img
-      src="/hero-gravata.png"
-      alt="Vista de Gravatá"
-      className="h-full w-full object-cover object-center opacity-50"
-      fetchPriority="high"
-      decoding="async"
-      width="800"
-      height="600"
-    />
-  </picture>
-
-  <div className="absolute inset-0 bg-linear-to-b from-white/ via-white/10 to-[#f8fafc]" />
-  <div className="absolute inset-0 bg-orange-30/20" />
-</div>
-
-      {/* IMAGEM DESKTOP */}
-      <div className="absolute inset-y-0 right-0 hidden w-[68%] lg:block">
+    /* pb-32 reserva espaço para os cards de categoria subirem */
+    <section className="relative flex min-h-screen flex-col items-center justify-center pb-32 pt-24">
+      {/* FUNDO */}
+      <div className="absolute inset-0 z-0">
         <picture>
+          <source srcSet="/hero-gravata-mobile.webp" media="(max-width:1023px)" type="image/webp" />
           <source srcSet="/hero-gravata.webp" type="image/webp" />
           <img
             src="/hero-gravata.png"
             alt="Vista de Gravatá"
             className="h-full w-full object-cover object-center"
-            fetchPriority="low"
-            loading="lazy"
+            fetchPriority="high"
             decoding="async"
             width="1400"
             height="900"
           />
         </picture>
-        <div className="absolute inset-0 bg-linear-to-r from-[#f8fafc] via-[#f8fafc]/75 via-20% to-transparent" />
+        {/* Overlay escuro neutro — sem tom alaranjado */}
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* CONTEÚDO */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 md:py-20">
-        <div className="flex min-h-140 items-center lg:min-h-175">
-          <div className="max-w-3xl text-center lg:text-left">
-            <span className="inline-flex rounded-full border border-orange-200 bg-white/90 px-4 py-1.5 text-sm font-medium text-orange-600 shadow-sm backdrop-blur-sm">
-              Diretório premium de Gravatá
-            </span>
+      <div className="relative z-10 w-full px-5 text-center">
+        {/* Subtítulo */}
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70 md:text-sm">
+          Descubra e conecte-se com os melhores negócios de Gravatá
+        </p>
 
-            <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-[-0.05em] text-slate-900 md:text-6xl lg:text-7xl">
-              Descubra o melhor de <span className="text-orange-500">Gravatá</span> com mais praticidade
-            </h1>
+        {/* Título */}
+        <h1 className="mt-4 text-4xl font-extrabold leading-tight text-white md:text-6xl lg:text-[5rem]">
+          Encontre o Melhor de{" "}
+          <span className="text-brand-500">GRAVATÁ</span>
+        </h1>
 
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 md:text-lg">
-              Encontre restaurantes, pousadas, lojas e prestadores de serviço em
-              uma experiência moderna, rápida e pensada para quem mora ou visita
-              a cidade.
-            </p>
-
-            {/* BUSCA */}
-            <div className="mt-8 w-full max-w-2xl rounded-[30px] border border-slate-200 bg-white/95 p-2 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur-sm">
-              <div className="flex items-center gap-3 rounded-3xl px-3 py-2">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-orange-500">
-                  <Search className="h-5 w-5" />
-                </div>
-
-                <input
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSearch();
-                  }}
-                  placeholder="O que você procura em Gravatá?"
-                  className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400 md:text-base"
-                />
-
-                <button
-                  onClick={handleSearch}
-                  className="rounded-2xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600 cursor-pointer"
-                >
-                  Buscar
-                </button>
-              </div>
+        {/* BARRA DE BUSCA */}
+        <div className="mx-auto mt-10 w-full max-w-3xl overflow-hidden rounded-full bg-white shadow-2xl">
+          <div className="flex items-center">
+            {/* Keyword */}
+            <div className="flex flex-1 items-center gap-2 px-5 py-0">
+              <Search className="h-4 w-4 shrink-0 text-slate-400" />
+              <input
+                type="text"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
+                placeholder="O que você procura?"
+                className="w-full bg-transparent py-4 text-sm text-slate-700 outline-none placeholder:text-slate-400"
+              />
             </div>
 
-            {/* CHIPS */}
-            <div className="mt-6 flex flex-wrap gap-3 max-lg:justify-center">
-              {quickCategories.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => handleQuickCategory(item)}
-                  className="rounded-full border border-slate-200 bg-white/95 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600 cursor-pointer"
-                >
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </button>
-              ))}
+            <div className="h-8 w-px shrink-0 bg-slate-200" />
+
+            {/* Localização */}
+            <div className="hidden items-center gap-2 px-5 md:flex">
+              <MapPin className="h-4 w-4 shrink-0 text-brand-500" />
+              <span className="whitespace-nowrap text-sm text-slate-500">Gravatá, PE</span>
             </div>
 
-            
+            <div className="hidden h-8 w-px shrink-0 bg-slate-200 md:block" />
+
+            {/* Categoria */}
+            <div className="hidden items-center gap-2 px-5 md:flex">
+              <LayoutGrid className="h-4 w-4 shrink-0 text-slate-400" />
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="bg-transparent py-4 text-sm text-slate-500 outline-none cursor-pointer"
+              >
+                <option value="">Selecionar Categoria</option>
+                {categoryOptions.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Botão */}
+            <button
+              onClick={handleSearch}
+              className="m-1.5 flex items-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-brand-600 cursor-pointer shrink-0"
+            >
+              Buscar <Search className="h-4 w-4" />
+            </button>
           </div>
+        </div>
+
+        {/* CHIPS */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <span className="text-sm font-medium text-white/60">Descubra Gravatá:</span>
+          {chips.map((chip) => {
+            const Icon = chip.icon;
+            return (
+              <button
+                key={chip.value}
+                onClick={() => navigate(`/resultados?q=${chip.value}&local=Gravatá`)}
+                className="flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer"
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {chip.label}
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>

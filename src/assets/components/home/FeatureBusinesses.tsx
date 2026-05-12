@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import { MapPin, ArrowUpRight, MessageCircle } from "lucide-react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { MapPin, Phone, MessageCircle, ArrowUpRight, Heart, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../../lib/supabase";
-import {
-  mapSupabaseBusiness,
-  type PublicBusiness,
-} from "../../shared/businessMapper";
+import { mapSupabaseBusiness, type PublicBusiness } from "../../shared/businessMapper";
+
+const CARDS_PER_PAGE = 4;
 
 export default function FeaturedBusinesses() {
   const navigate = useNavigate();
   const [businesses, setBusinesses] = useState<PublicBusiness[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    async function loadFeaturedBusinesses() {
-      setLoading(true);
+    async function load() {
       const { data, error } = await supabase
         .from("businesses")
         .select("*")
@@ -22,140 +22,209 @@ export default function FeaturedBusinesses() {
         .eq("featured", true)
         .order("created_at", { ascending: false })
         .limit(12);
-
-      if (error) {
-        setBusinesses([]);
-        setLoading(false);
-        return;
-      }
-      setBusinesses((data || []).map(mapSupabaseBusiness));
+      if (!error) setBusinesses((data || []).map(mapSupabaseBusiness));
       setLoading(false);
     }
-    loadFeaturedBusinesses();
+    load();
   }, []);
 
-  function openWhatsApp(business: PublicBusiness) {
-    if (!business.whatsapp) return;
-    const msg = `Olá! Encontrei sua empresa no Conecta Gravatá.\n\n*Empresa:* ${business.name}\n*Local:* ${business.location}\n\nGostaria de mais informações.`;
-    window.open(`https://wa.me/${business.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+  const totalPages = Math.ceil(businesses.length / CARDS_PER_PAGE);
+
+  const goTo = useCallback((p: number) => {
+    setPage(p);
+    trackRef.current?.scrollTo({ left: 0, behavior: "instant" });
+  }, []);
+
+  const prev = () => goTo((page - 1 + totalPages) % totalPages);
+  const next = () => goTo((page + 1) % totalPages);
+
+  const visible = businesses.slice(page * CARDS_PER_PAGE, page * CARDS_PER_PAGE + CARDS_PER_PAGE);
+
+  function openWhatsApp(b: PublicBusiness) {
+    if (!b.whatsapp) return;
+    const msg = `Olá! Encontrei sua empresa no Conecta Gravatá.\n\n*Empresa:* ${b.name}\n*Local:* ${b.location}\n\nGostaria de mais informações.`;
+    window.open(`https://wa.me/${b.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
   return (
-    <section
-      id="destaques"
-      className="bg-[linear-gradient(to_bottom,#ffffff,#f8fafc)] px-6 py-16 md:py-20"
-    >
+    <section id="destaques" className="bg-white px-5 py-16 md:py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <span className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm font-medium text-orange-600">
-              Destaques do portal
-            </span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-              Empresas com mais visibilidade em Gravatá
-            </h2>
-            <p className="mt-3 text-sm leading-7 text-slate-600 md:text-base">
-              Negócios locais com presença fortalecida no portal para serem
-              encontrados com mais rapidez por moradores e turistas.
-            </p>
-          </div>
 
-          <button
-            onClick={() => navigate("/resultados?local=Gravatá")}
-            className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
-          >
-            Ver todos
-            <ArrowUpRight className="h-4 w-4" />
-          </button>
+        {/* Header */}
+        <div className="mb-12 text-center">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-500">
+            Empresas em Destaque
+          </p>
+          <h2 className="mt-3 text-3xl font-bold text-slate-900 md:text-4xl">
+            Os Melhores Negócios de Gravatá
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-500">
+            Empresas locais com presença fortalecida no portal, prontas para atender moradores e turistas.
+          </p>
         </div>
 
-        {/* Loading */}
         {loading ? (
-          <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <p className="text-sm text-slate-500">Carregando destaques...</p>
-          </div>
+          <div className="py-12 text-center text-sm text-slate-400">Carregando destaques...</div>
 
-        /* Empty */
         ) : businesses.length === 0 ? (
-          <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <h3 className="text-xl font-bold text-slate-900">Nenhuma empresa em destaque ainda</h3>
-            <p className="mt-3 text-sm leading-6 text-slate-600">
-              Assim que você marcar empresas como destaque no admin, elas vão aparecer aqui automaticamente.
-            </p>
+          <div className="rounded-3xl border border-slate-100 bg-slate-50 p-12 text-center">
+            <h3 className="text-lg font-bold text-slate-800">Nenhuma empresa em destaque ainda</h3>
+            <p className="mt-2 text-sm text-slate-500">Marque empresas como destaque no painel admin.</p>
           </div>
 
-        /* Grid */
         ) : (
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {businesses.map((business) => (
-              <article
-                key={business.id}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-orange-200 bg-white shadow-sm shadow-orange-100/50 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-100"
-              >
-                {/* Image */}
-                <div className="relative h-48 shrink-0 overflow-hidden">
-                  <img
-                    src={business.image}
-                    alt={business.name}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/5 to-transparent" />
+          <>
+            {/* Cards */}
+            <div
+              ref={trackRef}
+              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            >
+              {visible.map((b) => (
+                <article
+                  key={b.id}
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  {/* Imagem */}
+                  <div className="relative h-48 shrink-0 overflow-hidden">
+                    <img
+                      src={b.image}
+                      alt={b.name}
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
 
-                  {/* Destaque badge */}
-                  <span className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-orange-500 px-2.5 py-1 text-xs font-semibold text-white shadow">
-                    ★ Destaque
-                  </span>
+                    {/* Badge categoria */}
+                    <div className="absolute left-3 top-3">
+                      <span className="flex items-center gap-1 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm backdrop-blur-sm">
+                        <Star className="h-3 w-3 fill-brand-500 text-brand-500" />
+                        {b.category}
+                      </span>
+                    </div>
 
-                  {/* Categoria badge */}
-                  <span className="absolute bottom-3 left-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium text-slate-700 backdrop-blur-sm">
-                    {business.category}
-                  </span>
-                </div>
+                    {/* Badge Destaque */}
+                    <span className="absolute right-3 top-3 rounded-full bg-green-500 px-2.5 py-1 text-xs font-bold text-white shadow">
+                      Destaque
+                    </span>
 
-                {/* Content — flex-1 garante que o botão sempre fica embaixo */}
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="text-base font-bold leading-snug text-slate-900">
-                    {business.name}
-                  </h3>
-
-                  <div className="mt-2 flex items-center gap-1.5 text-xs text-slate-500">
-                    <MapPin className="h-3.5 w-3.5 shrink-0" />
-                    <span className="truncate">{business.location}</span>
+                    {/* Coração */}
+                    <button className="absolute bottom-3 right-3 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white/90 text-slate-400 shadow transition hover:text-brand-500">
+                      <Heart className="h-3.5 w-3.5" />
+                    </button>
                   </div>
 
-                  {business.description && (
-                    <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-500">
-                      {business.description}
-                    </p>
-                  )}
+                  {/* Corpo */}
+                  <div className="flex flex-1 flex-col p-4">
+                    <h3 className="text-base font-bold leading-snug text-slate-900 transition group-hover:text-brand-500">
+                      {b.name}
+                    </h3>
 
-                  {/* Botões sempre no rodapé do card */}
-                  <div className="mt-auto flex gap-2 pt-5">
-                    <Link
-                      to={`/empresa/${business.id}`}
-                      className="flex flex-1 items-center justify-center rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600"
-                    >
-                      Ver detalhes
-                    </Link>
-
-                    {business.whatsapp && (
-                      <button
-                        onClick={() => openWhatsApp(business)}
-                        title="Abrir WhatsApp"
-                        className="flex items-center justify-center gap-1.5 rounded-xl bg-green-500 px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-green-600"
-                      >
-                        <MessageCircle className="h-4 w-4" />
-                        <span className="hidden sm:inline">WhatsApp</span>
-                      </button>
+                    {b.description && (
+                      <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-slate-500">
+                        {b.description}
+                      </p>
                     )}
+
+                    <div className="mt-3 space-y-1.5">
+                      <div className="flex items-center gap-2 text-xs text-slate-500">
+                        <MapPin className="h-3.5 w-3.5 shrink-0 text-brand-500" />
+                        <span className="truncate">{b.location}</span>
+                      </div>
+                      {b.whatsapp && (
+                        <div className="flex items-center gap-2 text-xs text-slate-500">
+                          <Phone className="h-3.5 w-3.5 shrink-0 text-brand-500" />
+                          <span>{b.whatsapp}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="my-4 border-t border-slate-100" />
+
+                    <div className="mt-auto flex items-center justify-between">
+                      <span className="text-sm font-bold text-slate-800">Gravatá, PE</span>
+                      <div className="flex items-center gap-2">
+                        {b.whatsapp && (
+                          <button
+                            onClick={() => openWhatsApp(b)}
+                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-slate-200 text-slate-400 transition hover:border-brand-500 hover:text-brand-500"
+                            title="WhatsApp"
+                          >
+                            <MessageCircle className="h-3.5 w-3.5" />
+                          </button>
+                        )}
+                        <Link
+                          to={`/empresa/${b.id}`}
+                          className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-500 text-white transition hover:bg-brand-600"
+                          title="Ver detalhes"
+                        >
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
+                    </div>
                   </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Controles do carrossel */}
+            {totalPages > 1 && (
+              <div className="mt-10 flex flex-col items-center gap-5">
+                {/* Dots */}
+                <div className="flex items-center gap-2.5">
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => goTo(i)}
+                      className={`cursor-pointer rounded-full transition-all duration-300 ${
+                        i === page
+                          ? "h-3 w-3 bg-brand-500"
+                          : "h-2.5 w-2.5 bg-slate-200 hover:bg-slate-300"
+                      }`}
+                      aria-label={`Página ${i + 1}`}
+                    />
+                  ))}
                 </div>
-              </article>
-            ))}
-          </div>
+
+                {/* Setas + ver todos */}
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={prev}
+                    className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand-500 hover:text-brand-500"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+
+                  <button
+                    onClick={() => navigate("/resultados?local=Gravatá")}
+                    className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand-500 hover:bg-brand-500 hover:text-white"
+                  >
+                    Ver todas as empresas
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
+
+                  <button
+                    onClick={next}
+                    className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand-500 hover:text-brand-500"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Se só tem uma página, mostra só o botão ver todos */}
+            {totalPages <= 1 && (
+              <div className="mt-10 text-center">
+                <button
+                  onClick={() => navigate("/resultados?local=Gravatá")}
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand-500 hover:bg-brand-500 hover:text-white"
+                >
+                  Ver todas as empresas
+                  <ArrowUpRight className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>

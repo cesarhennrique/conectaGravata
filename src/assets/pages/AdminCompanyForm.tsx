@@ -253,7 +253,7 @@ export default function AdminCompanyForm() {
             <button
               type="button"
               onClick={() => setStep("form")}
-              className="flex items-center gap-2 rounded-xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+              className="flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
             >
               Continuar com plano {PLAN_CONFIG[plan].label}
               <ChevronRight className="h-4 w-4" />
@@ -275,7 +275,7 @@ export default function AdminCompanyForm() {
           <button
             type="button"
             onClick={() => setStep("choose-plan")}
-            className="text-sm text-slate-400 hover:text-orange-500"
+            className="text-sm text-slate-400 hover:text-brand-500"
           >
             ← Trocar plano
           </button>
@@ -297,7 +297,7 @@ export default function AdminCompanyForm() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Ex: Bistrô da Serra"
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
                 required
               />
             </div>
@@ -309,7 +309,7 @@ export default function AdminCompanyForm() {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
                 required
               >
                 <option value="">Selecione...</option>
@@ -326,7 +326,7 @@ export default function AdminCompanyForm() {
                 value={formData.location}
                 onChange={handleChange}
                 placeholder="Ex: Centro, Gravatá - PE"
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
                 required
               />
             </div>
@@ -340,7 +340,7 @@ export default function AdminCompanyForm() {
                 onChange={handleChange}
                 rows={4}
                 placeholder="Descreva a empresa, seus produtos e diferenciais..."
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
                 required
               />
             </div>
@@ -354,7 +354,7 @@ export default function AdminCompanyForm() {
                 value={formData.whatsapp}
                 onChange={handleChange}
                 placeholder="5581999999999"
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
               />
             </div>
 
@@ -368,7 +368,7 @@ export default function AdminCompanyForm() {
                   value={formData.instagram}
                   onChange={handleChange}
                   placeholder="@empresa"
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
                 />
               </div>
             )}
@@ -392,7 +392,7 @@ export default function AdminCompanyForm() {
                   name="price_level"
                   value={formData.price_level}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
                 >
                   <option value="R$">R$ — Econômico</option>
                   <option value="R$$">R$$ — Moderado</option>
@@ -409,7 +409,7 @@ export default function AdminCompanyForm() {
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
               >
                 <option value="active">Ativa</option>
                 <option value="inactive">Inativa</option>
@@ -425,7 +425,7 @@ export default function AdminCompanyForm() {
                 name="due_date"
                 value={formData.due_date}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
               />
             </div>
 
@@ -464,7 +464,7 @@ export default function AdminCompanyForm() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex w-full items-center justify-center gap-3 rounded-xl border-2 border-dashed border-slate-200 px-6 py-8 text-slate-400 transition hover:border-orange-300 hover:text-orange-500"
+                    className="flex w-full items-center justify-center gap-3 rounded-xl border-2 border-dashed border-slate-200 px-6 py-8 text-slate-400 transition hover:border-brand-300 hover:text-brand-500"
                   >
                     <ImageIcon className="h-5 w-5" />
                     <span className="text-sm font-medium">
@@ -518,7 +518,7 @@ export default function AdminCompanyForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex items-center gap-2 rounded-xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {uploading ? (
                   <>

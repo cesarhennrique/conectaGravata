@@ -32,7 +32,7 @@ export default function FiltersSidebar() {
 
           <button
             onClick={() => navigate("/resultados")}
-            className="text-xs font-medium text-orange-500 transition hover:text-orange-600"
+            className="text-xs font-medium text-brand-500 transition hover:text-brand-600"
           >
             Limpar
           </button>
@@ -53,7 +53,7 @@ export default function FiltersSidebar() {
                   }
                   className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
                     active
-                      ? "border-orange-500 bg-orange-50 text-orange-600"
+                      ? "border-brand-500 bg-brand-50 text-brand-600"
                       : "border-slate-200 text-slate-700 hover:bg-slate-50"
                   }`}
                 >

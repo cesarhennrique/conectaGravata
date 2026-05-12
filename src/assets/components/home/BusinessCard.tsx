@@ -26,7 +26,7 @@ export default function BusinessCard({
         group overflow-hidden rounded-[26px] border bg-white transition duration-300
         hover:-translate-y-1 hover:shadow-xl
 
-        ${isPremium ? "md:col-span-2 border-orange-200 shadow-md" : ""}
+        ${isPremium ? "md:col-span-2 border-brand-200 shadow-md" : ""}
         ${isPro ? "border-slate-300" : "border-slate-200"}
       `}
     >
@@ -40,7 +40,7 @@ export default function BusinessCard({
 
         {/* BADGE */}
         {isPremium && (
-          <span className="absolute left-4 top-4 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">
+          <span className="absolute left-4 top-4 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">
             Destaque
           </span>
         )}
@@ -85,7 +85,7 @@ export default function BusinessCard({
           <button
             className={`
               flex-1 rounded-xl px-4 py-2 text-sm font-semibold text-white
-              ${isPremium ? "bg-orange-500 hover:bg-orange-600" : "bg-slate-900"}
+              ${isPremium ? "bg-brand-500 hover:bg-brand-600" : "bg-slate-900"}
             `}
           >
             Ver detalhes

@@ -38,7 +38,7 @@ export default function AdminLogin() {
       <div className="mx-auto flex min-h-[80vh] max-w-md items-center">
         <div className="w-full rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm">
           <div className="text-center">
-            <span className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-4 py-1 text-sm font-medium text-orange-600">
+            <span className="inline-flex rounded-full border border-brand-200 bg-brand-50 px-4 py-1 text-sm font-medium text-brand-600">
               Área administrativa
             </span>
 
@@ -61,7 +61,7 @@ export default function AdminLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@conectagravata.com"
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
                 required
               />
             </div>
@@ -75,7 +75,7 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Sua senha"
-                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+                className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
                 required
               />
             </div>

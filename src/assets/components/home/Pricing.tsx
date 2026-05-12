@@ -13,7 +13,7 @@ export default function Pricing() {
   return (
     <section className="bg-slate-50 px-6 py-16 md:py-20">
       <div className="mx-auto max-w-7xl text-center">
-        <span className="rounded-full bg-orange-50 px-4 py-1 text-sm font-medium text-orange-600">
+        <span className="rounded-full bg-brand-50 px-4 py-1 text-sm font-medium text-brand-600">
           Anuncie no portal
         </span>
 
@@ -41,8 +41,8 @@ export default function Pricing() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {/* PREMIUM */}
-          <article className="relative order-1 rounded-3xl border border-orange-300 bg-white p-6 text-left shadow-xl md:order-3">
-            <span className="absolute -top-3 left-6 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white shadow">
+          <article className="relative order-1 rounded-3xl border border-brand-300 bg-white p-6 text-left shadow-xl md:order-3">
+            <span className="absolute -top-3 left-6 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white shadow">
               Mais escolhido
             </span>
 
@@ -71,7 +71,7 @@ export default function Pricing() {
             </ul>
 
             <Link to="/cadastro-empresa?plano=Premium">
-              <button className="mt-6 w-full rounded-xl bg-orange-500 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">
+              <button className="mt-6 w-full rounded-xl bg-brand-500 py-3 text-sm font-semibold text-white transition hover:bg-brand-600">
                 Quero aparecer no topo
               </button>
             </Link>

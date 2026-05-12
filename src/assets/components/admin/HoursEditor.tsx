@@ -73,7 +73,7 @@ export default function HoursEditor({ value, onChange }: Props) {
             <select
               value={slot.days}
               onChange={(e) => update(i, { days: e.target.value })}
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-orange-400"
+              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-brand-400"
             >
               {DAY_PRESETS.map((d) => (
                 <option key={d} value={d}>{d}</option>
@@ -101,14 +101,14 @@ export default function HoursEditor({ value, onChange }: Props) {
                   type="time"
                   value={slot.open}
                   onChange={(e) => update(i, { open: e.target.value })}
-                  className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-orange-400"
+                  className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-brand-400"
                 />
                 <span className="text-xs text-slate-400">às</span>
                 <input
                   type="time"
                   value={slot.close}
                   onChange={(e) => update(i, { close: e.target.value })}
-                  className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-orange-400"
+                  className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-brand-400"
                 />
               </div>
             </>
@@ -130,7 +130,7 @@ export default function HoursEditor({ value, onChange }: Props) {
       <button
         type="button"
         onClick={addSlot}
-        className="flex items-center gap-2 rounded-xl border border-dashed border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-400 transition hover:border-orange-300 hover:text-orange-500"
+        className="flex items-center gap-2 rounded-xl border border-dashed border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-400 transition hover:border-brand-300 hover:text-brand-500"
       >
         <Plus className="h-4 w-4" />
         Adicionar outro período

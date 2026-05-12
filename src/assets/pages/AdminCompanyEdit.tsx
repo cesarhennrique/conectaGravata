@@ -145,7 +145,7 @@ export default function AdminCompanyEdit() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
               required
             />
           </div>
@@ -158,7 +158,7 @@ export default function AdminCompanyEdit() {
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
               required
             >
               <option value="">Selecione...</option>
@@ -175,7 +175,7 @@ export default function AdminCompanyEdit() {
               name="location"
               value={formData.location}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
               required
             />
           </div>
@@ -189,7 +189,7 @@ export default function AdminCompanyEdit() {
               value={formData.description}
               onChange={handleChange}
               rows={5}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
               required
             />
           </div>
@@ -203,7 +203,7 @@ export default function AdminCompanyEdit() {
               name="image_url"
               value={formData.image_url}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
             />
           </div>
 
@@ -216,7 +216,7 @@ export default function AdminCompanyEdit() {
               name="whatsapp"
               value={formData.whatsapp}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
             />
           </div>
 
@@ -229,7 +229,7 @@ export default function AdminCompanyEdit() {
               name="instagram"
               value={formData.instagram}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
             />
           </div>
 
@@ -241,7 +241,7 @@ export default function AdminCompanyEdit() {
               name="plan"
               value={formData.plan}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
             >
               <option value="basic">Basic</option>
               <option value="pro">Pro</option>
@@ -257,7 +257,7 @@ export default function AdminCompanyEdit() {
               name="price_level"
               value={formData.price_level}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
             >
               <option value="R$">R$</option>
               <option value="R$$">R$$</option>
@@ -274,7 +274,7 @@ export default function AdminCompanyEdit() {
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
             >
               <option value="active">Ativa</option>
               <option value="inactive">Inativa</option>
@@ -292,7 +292,7 @@ export default function AdminCompanyEdit() {
               name="due_date"
               value={formData.due_date}
               onChange={handleChange}
-              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
+              className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-brand-400"
             />
           </div>
 
@@ -313,7 +313,7 @@ export default function AdminCompanyEdit() {
                 name="featured"
                 checked={formData.featured}
                 onChange={handleChange}
-                className="h-4 w-4 accent-orange-500"
+                className="h-4 w-4 accent-brand-500"
               />
               Empresa em destaque
             </label>
@@ -329,7 +329,7 @@ export default function AdminCompanyEdit() {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-2xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-2xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {saving ? "Salvando..." : "Salvar alterações"}
             </button>

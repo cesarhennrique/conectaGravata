@@ -95,7 +95,7 @@ export default function ServiceCategoriesPage() {
       <div className="mx-auto max-w-7xl">
         {/* Topo */}
         <div className="max-w-3xl">
-          <span className="rounded-full bg-orange-50 px-4 py-1 text-sm font-medium text-orange-600">
+          <span className="rounded-full bg-brand-50 px-4 py-1 text-sm font-medium text-brand-600">
             Prestadores de serviço
           </span>
 
@@ -118,7 +118,7 @@ export default function ServiceCategoriesPage() {
 
             <button
               onClick={() => goToResults("serviços")}
-              className="hidden rounded-2xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600 md:inline-flex"
+              className="hidden rounded-2xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-600 md:inline-flex"
             >
               Ver todos
             </button>
@@ -134,7 +134,7 @@ export default function ServiceCategoriesPage() {
                   onClick={() => goToResults(service.query)}
                   className="group rounded-[24px] border border-slate-200 bg-white p-4 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 transition group-hover:bg-orange-100 group-hover:text-orange-500">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 transition group-hover:bg-brand-100 group-hover:text-brand-500">
                     <Icon className="h-5 w-5" />
                   </div>
 

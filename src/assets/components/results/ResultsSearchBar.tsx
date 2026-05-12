@@ -53,7 +53,7 @@ export default function ResultsSearchBar() {
 
         <button
           onClick={handleSearch}
-          className="rounded-2xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+          className="rounded-2xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
         >
           Buscar
         </button>

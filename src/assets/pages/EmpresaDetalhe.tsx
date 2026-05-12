@@ -110,7 +110,7 @@ Gostaria de mais informações.
                 />
 
                 {isPremium && (
-                  <span className="absolute left-4 top-4 rounded-full bg-orange-500 px-4 py-1.5 text-xs font-semibold text-white shadow-sm">
+                  <span className="absolute left-4 top-4 rounded-full bg-brand-500 px-4 py-1.5 text-xs font-semibold text-white shadow-sm">
                     Destaque
                   </span>
                 )}
@@ -229,8 +229,8 @@ Gostaria de mais informações.
               </div>
 
               {isPremium && (
-                <div className="mt-8 rounded-2xl border border-orange-200 bg-orange-50 p-4">
-                  <p className="text-sm font-semibold text-orange-700">
+                <div className="mt-8 rounded-2xl border border-brand-200 bg-brand-50 p-4">
+                  <p className="text-sm font-semibold text-brand-700">
                     Empresa em destaque no portal
                   </p>
                   <p className="mt-2 text-sm leading-6 text-slate-600">

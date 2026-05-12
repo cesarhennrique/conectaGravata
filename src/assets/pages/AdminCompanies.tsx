@@ -68,7 +68,7 @@ export default function AdminCompanies() {
 
         <Link
           to="/admin/empresas/nova"
-          className="inline-flex rounded-2xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+          className="inline-flex rounded-2xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
         >
           Nova empresa
         </Link>
@@ -125,7 +125,7 @@ export default function AdminCompanies() {
                       <div className="flex flex-wrap gap-3">
                         <Link
                           to={`/admin/empresas/${company.id}/editar`}
-                          className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+                          className="text-sm font-medium text-slate-700 transition hover:text-brand-600"
                         >
                           Editar
                         </Link>

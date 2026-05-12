@@ -40,7 +40,7 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
         {/* Logo + nav */}
         <div className="flex items-center gap-8">
           <Link to="/admin" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500 text-white font-bold text-sm">CG</div>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500 text-white font-bold text-sm">CG</div>
             <span className={`text-sm font-bold ${dark ? "text-white" : "text-slate-900"}`}>Conecta Gravatá</span>
           </Link>
 
@@ -82,7 +82,7 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
 
           <button className={`relative rounded-full p-2 ${dark ? "bg-zinc-800 text-zinc-300" : "bg-slate-100 text-slate-500"}`}>
             <Bell className="h-4 w-4" />
-            <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-orange-500" />
+            <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-brand-500" />
           </button>
 
           <button
@@ -107,7 +107,7 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
                 title={label}
                 className={`flex h-10 w-10 items-center justify-center rounded-xl transition ${
                   active
-                    ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
+                    ? "bg-brand-500 text-white shadow-lg shadow-brand-500/30"
                     : dark
                     ? "text-zinc-400 hover:bg-zinc-800 hover:text-white"
                     : "text-slate-400 hover:bg-slate-100 hover:text-slate-700"

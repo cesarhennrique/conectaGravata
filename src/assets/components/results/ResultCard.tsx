@@ -47,7 +47,7 @@ Gostaria de mais informações.
     <article
       className={`rounded-3xl border bg-white p-4 shadow-sm transition hover:shadow-md ${
         isPremium
-          ? "border-orange-300 ring-1 ring-orange-100"
+          ? "border-brand-300 ring-1 ring-brand-100"
           : "border-slate-200"
       }`}
     >
@@ -62,7 +62,7 @@ Gostaria de mais informações.
           />
 
           {isPremium && (
-            <span className="absolute left-3 top-3 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white shadow-sm">
+            <span className="absolute left-3 top-3 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white shadow-sm">
               Destaque
             </span>
           )}
@@ -109,7 +109,7 @@ Gostaria de mais informações.
               to={`/empresa/${id}`}
               className={`rounded-2xl px-4 py-2.5 text-sm font-semibold text-white transition ${
                 isPremium
-                  ? "bg-orange-500 hover:bg-orange-600"
+                  ? "bg-brand-500 hover:bg-brand-600"
                   : "bg-slate-900 hover:opacity-90"
               }`}
             >

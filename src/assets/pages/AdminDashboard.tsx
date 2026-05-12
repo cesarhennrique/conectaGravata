@@ -121,7 +121,7 @@ export default function AdminDashboard() {
 
       {loading ? (
         <div className="flex items-center gap-3 rounded-2xl bg-white p-6 shadow-sm">
-          <div className="h-4 w-4 animate-spin rounded-full border-2 border-orange-500 border-t-transparent" />
+          <div className="h-4 w-4 animate-spin rounded-full border-2 border-brand-500 border-t-transparent" />
           <p className="text-sm text-slate-500">Carregando dados...</p>
         </div>
       ) : error ? (
@@ -150,14 +150,14 @@ export default function AdminDashboard() {
             </div>
 
             {/* MRR */}
-            <div className="rounded-2xl bg-orange-500 p-6 text-white shadow-sm shadow-orange-200">
+            <div className="rounded-2xl bg-brand-500 p-6 text-white shadow-sm shadow-brand-200">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-orange-100">Receita Mensal (MRR)</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-100">Receita Mensal (MRR)</p>
                   <p className="mt-2 text-4xl font-bold">
                     R${m.mrr.toLocaleString("pt-BR")}
                   </p>
-                  <p className="mt-1 flex items-center gap-1 text-xs text-orange-100">
+                  <p className="mt-1 flex items-center gap-1 text-xs text-brand-100">
                     <TrendingUp className="h-3 w-3" /> {m.paidPct}% com plano pago
                   </p>
                 </div>
@@ -246,7 +246,7 @@ export default function AdminDashboard() {
                   { label: "Ativas", value: m.active, icon: CheckCircle2, color: "text-emerald-600", bg: "bg-emerald-50" },
                   { label: "Pendentes", value: m.pending, icon: Clock, color: "text-amber-600", bg: "bg-amber-50" },
                   { label: "Vencidas", value: m.expired, icon: XCircle, color: "text-red-600", bg: "bg-red-50" },
-                  { label: "Em destaque", value: m.featured, icon: Star, color: "text-orange-500", bg: "bg-orange-50" },
+                  { label: "Em destaque", value: m.featured, icon: Star, color: "text-brand-500", bg: "bg-brand-50" },
                 ].map(({ label, value, icon: Icon, color, bg }) => (
                   <div key={label} className={`rounded-xl p-4 ${bg}`}>
                     <div className={`flex items-center gap-2 ${color}`}>
@@ -295,7 +295,7 @@ export default function AdminDashboard() {
 
                 <Link
                   to="/admin/empresas/nova"
-                  className="flex items-center gap-2 rounded-xl bg-orange-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600"
+                  className="flex items-center gap-2 rounded-xl bg-brand-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-600"
                 >
                   <Plus className="h-4 w-4" />
                   Nova empresa
@@ -329,7 +329,7 @@ export default function AdminDashboard() {
                         <tr key={company.id} className="border-b border-slate-50 transition hover:bg-slate-50">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-orange-100 text-xs font-bold text-orange-600">
+                              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-brand-100 text-xs font-bold text-brand-600">
                                 {company.name.charAt(0).toUpperCase()}
                               </div>
                               <span className="font-medium text-slate-900">{company.name}</span>
@@ -351,7 +351,7 @@ export default function AdminDashboard() {
                           <td className="px-6 py-4">
                             <Link
                               to={`/admin/empresas/${company.id}/editar`}
-                              className="flex items-center gap-1 text-xs font-medium text-orange-500 hover:text-orange-600"
+                              className="flex items-center gap-1 text-xs font-medium text-brand-500 hover:text-brand-600"
                             >
                               Ver <ArrowRight className="h-3 w-3" />
                             </Link>
@@ -364,7 +364,7 @@ export default function AdminDashboard() {
 
                 {filteredRows.length > 10 && (
                   <div className="border-t border-slate-100 p-4 text-center">
-                    <Link to="/admin/empresas" className="text-sm font-medium text-orange-500 hover:text-orange-600">
+                    <Link to="/admin/empresas" className="text-sm font-medium text-brand-500 hover:text-brand-600">
                       Ver todas as {filteredRows.length} empresas →
                     </Link>
                   </div>
