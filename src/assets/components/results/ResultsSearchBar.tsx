@@ -110,23 +110,60 @@ export default function ResultsSearchBar() {
         </div>
 
         {/* Filtros rápidos — apenas mobile */}
-        <div className="mt-4 flex flex-wrap justify-center gap-2 md:hidden">
-          {mobileFilterChips.map((chip) => {
-            const active = searchParams.get("categoria") === chip.value || searchParams.get("q") === chip.value;
-            return (
-              <button
-                key={chip.value}
-                onClick={() => navigate(`/resultados?categoria=${chip.value}`)}
-                className={`rounded-full border px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition cursor-pointer ${
-                  active
-                    ? "border-brand-500 bg-brand-500 text-white"
-                    : "border-white/30 bg-white/10 text-white hover:bg-brand-500 hover:border-brand-500"
-                }`}
-              >
-                {chip.label}
-              </button>
-            );
-          })}
+        <div className="mt-4 flex flex-col items-center gap-3 md:hidden">
+          {/* Chips de categoria */}
+          <div className="flex flex-wrap justify-center gap-2">
+            {mobileFilterChips.map((chip) => {
+              const active = searchParams.get("categoria") === chip.value || searchParams.get("q") === chip.value;
+              return (
+                <button
+                  key={chip.value}
+                  onClick={() => {
+                    const params = new URLSearchParams(searchParams);
+                    if (active) params.delete("categoria");
+                    else params.set("categoria", chip.value);
+                    navigate(`/resultados?${params.toString()}`);
+                  }}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition cursor-pointer ${
+                    active
+                      ? "border-brand-500 bg-brand-500 text-white"
+                      : "border-white/30 bg-white/10 text-white hover:bg-brand-500 hover:border-brand-500"
+                  }`}
+                >
+                  {chip.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Toggles: Aberto agora + Aceita cartão */}
+          <div className="flex gap-2">
+            {[
+              { label: "Aberto agora", key: "aberto" },
+              { label: "Aceita cartão", key: "cartao" },
+            ].map((toggle) => {
+              const active = searchParams.get(toggle.key) === "true";
+              return (
+                <button
+                  key={toggle.key}
+                  onClick={() => {
+                    const params = new URLSearchParams(searchParams);
+                    if (active) params.delete(toggle.key);
+                    else params.set(toggle.key, "true");
+                    navigate(`/resultados?${params.toString()}`);
+                  }}
+                  className={`flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-xs font-semibold backdrop-blur-sm transition cursor-pointer ${
+                    active
+                      ? "border-brand-500 bg-brand-500 text-white"
+                      : "border-white/30 bg-white/10 text-white hover:bg-white/20"
+                  }`}
+                >
+                  <span className={`h-1.5 w-1.5 rounded-full ${active ? "bg-white" : "bg-white/50"}`} />
+                  {toggle.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
