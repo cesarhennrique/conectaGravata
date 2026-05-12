@@ -62,7 +62,7 @@ export default function Navbar() {
               { label: "Início", to: "/" },
               { label: "Categorias", section: "categorias" },
               { label: "Destaques", section: "destaques" },
-              { label: "Como Funciona", section: "como-funciona" },
+              { label: "Prestadores", to: "/prestadores" },
               { label: "Notícias", section: "noticias" },
             ].map((item) => (
               item.to ? (
@@ -167,9 +167,8 @@ export default function Navbar() {
             { label: "Início", to: "/" },
             { label: "Categorias", section: "categorias" },
             { label: "Destaques", section: "destaques" },
-            { label: "Como Funciona", section: "como-funciona" },
-            { label: "Notícias", section: "noticias" },
             { label: "Prestadores", to: "/prestadores" },
+            { label: "Notícias", section: "noticias" },
           ].map((item) =>
             item.to ? (
               <Link
