@@ -95,21 +95,21 @@ export default function ServiceCategoriesPage() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 xl:grid-cols-8">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-8">
             {serviceCategories.map((service) => {
               const Icon = service.icon;
               return (
                 <button
                   key={service.title}
                   onClick={() => goToResults(service.query)}
-                  className="group cursor-pointer rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg"
+                  className="group flex cursor-pointer flex-col items-center gap-1 rounded-2xl border border-slate-100 bg-white px-3 pb-4 pt-4 shadow-xl shadow-black/10 transition duration-200 hover:-translate-y-1 hover:shadow-2xl"
                 >
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-600 transition group-hover:bg-brand-50 group-hover:text-brand-500">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <p className="mt-3 text-xs font-semibold leading-snug text-slate-800">
+                  <span className="text-center text-sm font-bold leading-tight text-slate-800 transition group-hover:text-brand-500">
                     {service.title}
-                  </p>
+                  </span>
+                  <div className="mt-2 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 transition group-hover:bg-brand-100">
+                    <Icon className="h-5 w-5 text-brand-500" strokeWidth={1.5} />
+                  </div>
                 </button>
               );
             })}
