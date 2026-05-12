@@ -142,26 +142,23 @@ export default function FeaturedBusinesses() {
 
                     <div className="my-4 border-t border-slate-100" />
 
-                    <div className="mt-auto flex items-center justify-between">
-                      <span className="text-sm font-bold text-slate-800">Gravatá, PE</span>
-                      <div className="flex items-center gap-2">
-                        {b.whatsapp && (
-                          <button
-                            onClick={() => openWhatsApp(b)}
-                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-slate-200 text-slate-400 transition hover:border-brand-500 hover:text-brand-500"
-                            title="WhatsApp"
-                          >
-                            <MessageCircle className="h-3.5 w-3.5" />
-                          </button>
-                        )}
-                        <Link
-                          to={`/empresa/${b.id}`}
-                          className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-500 text-white transition hover:bg-brand-600"
-                          title="Ver detalhes"
+                    <div className="mt-auto flex gap-2">
+                      <Link
+                        to={`/empresa/${b.id}`}
+                        className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-brand-500 px-3 py-2.5 text-xs font-semibold text-white transition hover:bg-brand-600"
+                      >
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                        Ver detalhes
+                      </Link>
+                      {b.whatsapp && (
+                        <button
+                          onClick={() => openWhatsApp(b)}
+                          className="flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl bg-green-500 px-3 py-2.5 text-xs font-semibold text-white transition hover:bg-green-600"
                         >
-                          <ArrowUpRight className="h-3.5 w-3.5" />
-                        </Link>
-                      </div>
+                          <MessageCircle className="h-3.5 w-3.5" />
+                          WhatsApp
+                        </button>
+                      )}
                     </div>
                   </div>
                 </article>
