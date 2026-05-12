@@ -1,4 +1,4 @@
-import { Search, MapPin, LayoutGrid, UtensilsCrossed, ShoppingBag, Hotel, Landmark, SlidersHorizontal, Heart, ChevronUp, X, Clock, CreditCard } from "lucide-react";
+import { Search, MapPin, LayoutGrid, UtensilsCrossed, ShoppingBag, Hotel, Landmark, SlidersHorizontal, Heart, ChevronUp, X, Clock, CreditCard, Coffee, Scissors, Stethoscope, Shirt, Car } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,14 @@ const allCategories = [
   "Saúde","Serviços","Moda","Automotivo","Academia","Educação","Turismo",
 ];
 
-const extraMobileCategories = ["Cafeteria", "Beleza", "Serviços", "Saúde", "Moda", "Automotivo"];
+const extraMobileCategories = [
+  { label: "Cafeteria",  icon: Coffee,       value: "cafeteria"  },
+  { label: "Beleza",     icon: Scissors,     value: "beleza"     },
+  { label: "Serviços",   icon: LayoutGrid,   value: "serviços"   },
+  { label: "Saúde",      icon: Stethoscope,  value: "saúde"      },
+  { label: "Moda",       icon: Shirt,        value: "moda"       },
+  { label: "Automotivo", icon: Car,          value: "automotivo" },
+];
 
 const categoryOptions = [
   "Restaurante","Pousada","Cafeteria","Loja","Beleza",
@@ -208,18 +215,21 @@ export default function Hero() {
           {/* Categorias extras expandidas */}
           {showMoreCats && (
             <div className="mt-2 grid grid-cols-5 gap-2">
-              {extraMobileCategories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => navigate(`/resultados?q=${cat.toLowerCase()}&local=Gravatá`)}
-                  className="flex cursor-pointer flex-col items-center gap-1.5"
-                >
-                  <div className="flex h-12 w-full items-center justify-center rounded-2xl bg-white/90 shadow transition hover:bg-brand-50">
-                    <span className="text-xs font-bold text-brand-500">{cat.slice(0,3)}</span>
-                  </div>
-                  <span className="text-center text-[10px] font-semibold text-white">{cat}</span>
-                </button>
-              ))}
+              {extraMobileCategories.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <button
+                    key={cat.value}
+                    onClick={() => navigate(`/resultados?q=${cat.value}&local=Gravatá`)}
+                    className="flex cursor-pointer flex-col items-center gap-1.5"
+                  >
+                    <div className="flex h-14 w-full items-center justify-center rounded-2xl bg-white shadow-lg transition hover:bg-brand-50">
+                      <Icon className="h-6 w-6 text-brand-500" />
+                    </div>
+                    <span className="text-center text-[10px] font-semibold text-white">{cat.label}</span>
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>
