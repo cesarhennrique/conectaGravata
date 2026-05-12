@@ -3,6 +3,7 @@ import { MapPin, Phone, MessageCircle, ArrowUpRight, Heart, Star, ChevronLeft, C
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../../lib/supabase";
 import { mapSupabaseBusiness, type PublicBusiness } from "../../shared/businessMapper";
+import { isPublicBusinessOpenNow } from "../../shared/publicBusinessHours";
 
 const CARDS_PER_PAGE = 4;
 
@@ -47,11 +48,25 @@ export default function FeaturedBusinesses() {
   }
 
   return (
-    <section id="destaques" className="bg-white px-5 py-16 md:py-24 md:px-8">
+    <section id="destaques" className="bg-white py-10 md:py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
 
-        {/* Header */}
-        <div className="mb-12 text-center">
+        {/* Header mobile */}
+        <div className="mb-5 flex items-center justify-between px-5 md:hidden">
+          <div className="flex items-center gap-2">
+            <MapPin className="h-4 w-4 text-brand-500" />
+            <h2 className="text-lg font-extrabold text-slate-900">Destaques da cidade</h2>
+          </div>
+          <button
+            onClick={() => navigate("/resultados?local=Gravatá")}
+            className="flex cursor-pointer items-center gap-1 text-sm font-semibold text-brand-500"
+          >
+            Ver todos <ArrowUpRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+
+        {/* Header desktop */}
+        <div className="mb-12 hidden text-center md:block">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-500">
             Empresas em Destaque
           </p>
@@ -74,17 +89,49 @@ export default function FeaturedBusinesses() {
 
         ) : (
           <>
-            {/* Cards */}
-            <div
-              ref={trackRef}
-              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-            >
+            {/* Cards MOBILE — scroll horizontal */}
+            <div className="flex gap-4 overflow-x-auto px-5 pb-2 md:hidden" style={{ scrollbarWidth: "none" }}>
+              {businesses.map((b) => {
+                const openNow = isPublicBusinessOpenNow(b);
+                return (
+                  <Link
+                    to={`/empresa/${b.id}`}
+                    key={b.id}
+                    className="group flex w-44 shrink-0 flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm"
+                  >
+                    <div className="relative h-32 overflow-hidden">
+                      <img
+                        src={b.image}
+                        alt={b.name}
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <span className={`absolute left-2 top-2 rounded-full px-2 py-0.5 text-[10px] font-bold text-white shadow ${openNow ? "bg-brand-500" : "bg-slate-500"}`}>
+                        {openNow ? "Aberto" : "Fechado"}
+                      </span>
+                      <button className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-slate-400 shadow">
+                        <Heart className="h-3 w-3" />
+                      </button>
+                    </div>
+                    <div className="p-3">
+                      <p className="truncate text-sm font-bold text-slate-900">{b.name}</p>
+                      <p className="mt-0.5 truncate text-xs text-slate-500">
+                        {b.category}{b.priceLevel ? ` • ${b.priceLevel}` : ""}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Cards DESKTOP — grid paginado */}
+            <div ref={trackRef} className="hidden grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 md:grid">
               {visible.map((b) => (
                 <article
                   key={b.id}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
-                  {/* Imagem */}
                   <div className="relative h-48 shrink-0 overflow-hidden">
                     <img
                       src={b.image}
@@ -93,40 +140,28 @@ export default function FeaturedBusinesses() {
                       loading="lazy"
                       decoding="async"
                     />
-
-                    {/* Badge categoria */}
                     <div className="absolute left-3 top-3">
                       <span className="flex items-center gap-1 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm backdrop-blur-sm">
                         <Star className="h-3 w-3 fill-brand-500 text-brand-500" />
                         {b.category}
                       </span>
                     </div>
-
-                    {/* Badge Destaque — só para empresas premium */}
                     {b.featured && (
                       <span className="absolute right-3 top-3 rounded-full bg-green-500 px-2.5 py-1 text-xs font-bold text-white shadow">
                         Destaque
                       </span>
                     )}
-
-                    {/* Coração */}
                     <button className="absolute bottom-3 right-3 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white/90 text-slate-400 shadow transition hover:text-brand-500">
                       <Heart className="h-3.5 w-3.5" />
                     </button>
                   </div>
-
-                  {/* Corpo */}
                   <div className="flex flex-1 flex-col p-4">
                     <h3 className="text-base font-bold leading-snug text-slate-900 transition group-hover:text-brand-500">
                       {b.name}
                     </h3>
-
                     {b.description && (
-                      <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-slate-500">
-                        {b.description}
-                      </p>
+                      <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-slate-500">{b.description}</p>
                     )}
-
                     <div className="mt-3 space-y-1.5">
                       <div className="flex items-center gap-2 text-xs text-slate-500">
                         <MapPin className="h-3.5 w-3.5 shrink-0 text-brand-500" />
@@ -139,9 +174,7 @@ export default function FeaturedBusinesses() {
                         </div>
                       )}
                     </div>
-
                     <div className="my-4 border-t border-slate-100" />
-
                     <div className="mt-auto flex gap-2">
                       <Link
                         to={`/empresa/${b.id}`}
