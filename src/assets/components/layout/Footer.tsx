@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Col 1 — Logo + desc */}
           <div className="lg:col-span-1">
-            <img className="h-10 w-auto brightness-0 invert" src="/logo.png" alt="Conecta Gravatá" />
+            <img className="h-10 w-auto" src="/logonavbar.png" alt="Conecta Gravatá" />
             <p className="mt-4 text-sm leading-7">
               Plataforma para descobrir empresas, serviços e experiências em Gravatá-PE. Conectando moradores e turistas aos melhores negócios locais.
             </p>
