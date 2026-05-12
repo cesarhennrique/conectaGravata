@@ -31,7 +31,8 @@ export default function Navbar() {
   }
 
   const isHome = location.pathname === "/";
-  const transparent = isHome && !scrolled;
+  const isHeroPage = isHome || location.pathname === "/resultados" || location.pathname === "/prestadores";
+  const transparent = isHeroPage && !scrolled;
 
   return (
     <>
@@ -106,7 +107,7 @@ export default function Navbar() {
               className="inline-flex items-center gap-1.5 rounded-full bg-brand-500 px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-brand-600"
             >
               <Plus className="h-4 w-4" />
-              Add Empresa
+              Cadastrar Empresa
             </Link>
           </div>
 
@@ -150,7 +151,7 @@ export default function Navbar() {
             className="flex items-center justify-center gap-2 rounded-2xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white"
           >
             <Plus className="h-4 w-4" />
-            Add Empresa
+            Cadastrar Empresa
           </Link>
           <Link
             to="/admin"

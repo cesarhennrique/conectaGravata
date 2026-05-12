@@ -7,6 +7,15 @@ const categoryOptions = [
   "Saúde","Serviços","Moda","Automotivo","Academia","Educação","Turismo",
 ];
 
+const mobileFilterChips = [
+  { label: "Restaurante", value: "restaurante" },
+  { label: "Pousadas",    value: "pousada"     },
+  { label: "Cafeteria",   value: "cafeteria"   },
+  { label: "Beleza",      value: "beleza"      },
+  { label: "Serviços",    value: "serviços"    },
+  { label: "Lojas",       value: "loja"        },
+];
+
 export default function ResultsSearchBar() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -44,7 +53,7 @@ export default function ResultsSearchBar() {
 
       <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
         {/* Título */}
-        <h1 className="text-3xl font-extrabold text-white md:text-4xl">{title}</h1>
+        <h1 className="text-2xl font-extrabold text-white md:text-4xl">{title}</h1>
 
         {/* Breadcrumb */}
         <p className="mt-2 text-sm text-slate-400">
@@ -56,9 +65,9 @@ export default function ResultsSearchBar() {
         </p>
 
         {/* Barra de busca */}
-        <div className="mx-auto mt-8 overflow-hidden rounded-full bg-white shadow-2xl">
+        <div className="mx-auto mt-6 overflow-hidden rounded-full bg-white shadow-2xl">
           <div className="flex items-center">
-            <div className="flex flex-1 items-center gap-2 px-5">
+            <div className="flex flex-1 items-center gap-2 px-4 md:px-5">
               <Search className="h-4 w-4 shrink-0 text-slate-400" />
               <input
                 type="text"
@@ -66,7 +75,7 @@ export default function ResultsSearchBar() {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
                 placeholder="O que você procura?"
-                className="w-full bg-transparent py-4 text-sm text-slate-700 outline-none placeholder:text-slate-400"
+                className="w-full bg-transparent py-3.5 text-sm text-slate-700 outline-none placeholder:text-slate-400 md:py-4"
               />
             </div>
 
@@ -93,11 +102,31 @@ export default function ResultsSearchBar() {
 
             <button
               onClick={handleSearch}
-              className="m-1.5 flex items-center gap-2 rounded-full bg-brand-500 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-brand-600 cursor-pointer shrink-0"
+              className="m-1.5 flex items-center gap-2 rounded-full bg-brand-500 px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-600 cursor-pointer shrink-0 md:px-6 md:py-3.5"
             >
               Buscar <Search className="h-4 w-4" />
             </button>
           </div>
+        </div>
+
+        {/* Filtros rápidos — apenas mobile */}
+        <div className="mt-4 flex flex-wrap justify-center gap-2 md:hidden">
+          {mobileFilterChips.map((chip) => {
+            const active = searchParams.get("categoria") === chip.value || searchParams.get("q") === chip.value;
+            return (
+              <button
+                key={chip.value}
+                onClick={() => navigate(`/resultados?categoria=${chip.value}`)}
+                className={`rounded-full border px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition cursor-pointer ${
+                  active
+                    ? "border-brand-500 bg-brand-500 text-white"
+                    : "border-white/30 bg-white/10 text-white hover:bg-brand-500 hover:border-brand-500"
+                }`}
+              >
+                {chip.label}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
