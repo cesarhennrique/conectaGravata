@@ -48,9 +48,9 @@ export default function Navbar() {
           {/* LOGO */}
           <Link to="/" onClick={closeMenu} className="shrink-0">
             <img
-              src="/logo.png"
+              src={transparent ? "/logonavbar.png" : "/logovermelha.png"}
               alt="Conecta Gravatá"
-              className={`h-9 w-auto md:h-11 transition-all duration-300 ${transparent ? "brightness-0 invert" : ""}`}
+              className="h-9 w-auto transition-all duration-300 md:h-11"
               width="120"
               height="44"
               decoding="async"
@@ -138,7 +138,7 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center justify-between">
-          <img src="/logo.png" alt="Conecta Gravatá" className="h-10" />
+          <img src="/logovermelha.png" alt="Conecta Gravatá" className="h-10" />
           <button onClick={closeMenu} className="rounded-xl border border-slate-200 p-2 text-slate-700">
             <X className="h-5 w-5" />
           </button>
