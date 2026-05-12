@@ -25,8 +25,7 @@ export default function Hero() {
   }
 
   return (
-    /* pb-32 reserva espaço para os cards de categoria subirem */
-    <section className="relative flex min-h-screen flex-col items-center justify-center pb-32 pt-24">
+    <section className="relative flex min-h-screen flex-col items-center justify-center pb-32 pt-20 md:pt-24">
       {/* FUNDO */}
       <div className="absolute inset-0 z-0">
         <picture>
@@ -42,28 +41,29 @@ export default function Hero() {
             height="900"
           />
         </picture>
-        {/* Overlay escuro neutro — sem tom alaranjado */}
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* CONTEÚDO */}
       <div className="relative z-10 w-full px-5 text-center">
-        {/* Subtítulo */}
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70 md:text-sm">
+
+        {/* Subtítulo — oculto no mobile para não poluir */}
+        <p className="hidden text-xs font-semibold uppercase tracking-[0.2em] text-white/70 md:block md:text-sm">
           Descubra e conecte-se com os melhores negócios de Gravatá
         </p>
 
-        {/* Título */}
-        <h1 className="mt-4 text-4xl font-extrabold leading-tight text-white md:text-6xl lg:text-[5rem]">
+        {/* Título — menor no mobile */}
+        <h1 className="mt-2 text-3xl font-extrabold leading-tight text-white md:mt-4 md:text-6xl lg:text-[5rem]">
           Encontre o Melhor de{" "}
           <span className="text-brand-500">GRAVATÁ</span>
         </h1>
 
         {/* BARRA DE BUSCA */}
-        <div className="mx-auto mt-10 w-full max-w-3xl overflow-hidden rounded-full bg-white shadow-2xl">
+        <div className="mx-auto mt-8 w-full max-w-3xl overflow-hidden rounded-full bg-white shadow-2xl">
           <div className="flex items-center">
+
             {/* Keyword */}
-            <div className="flex flex-1 items-center gap-2 px-5 py-0">
+            <div className="flex flex-1 items-center gap-2 px-4 py-0 md:px-5">
               <Search className="h-4 w-4 shrink-0 text-slate-400" />
               <input
                 type="text"
@@ -71,21 +71,19 @@ export default function Hero() {
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
                 placeholder="O que você procura?"
-                className="w-full bg-transparent py-4 text-sm text-slate-700 outline-none placeholder:text-slate-400"
+                className="w-full bg-transparent py-3.5 text-sm text-slate-700 outline-none placeholder:text-slate-400 md:py-4"
               />
             </div>
 
-            <div className="h-8 w-px shrink-0 bg-slate-200" />
-
-            {/* Localização */}
+            {/* Divider + Localização — apenas desktop */}
+            <div className="hidden h-8 w-px shrink-0 bg-slate-200 md:block" />
             <div className="hidden items-center gap-2 px-5 md:flex">
               <MapPin className="h-4 w-4 shrink-0 text-brand-500" />
               <span className="whitespace-nowrap text-sm text-slate-500">Gravatá, PE</span>
             </div>
 
+            {/* Divider + Categoria — apenas desktop */}
             <div className="hidden h-8 w-px shrink-0 bg-slate-200 md:block" />
-
-            {/* Categoria */}
             <div className="hidden items-center gap-2 px-5 md:flex">
               <LayoutGrid className="h-4 w-4 shrink-0 text-slate-400" />
               <select
@@ -103,7 +101,7 @@ export default function Hero() {
             {/* Botão */}
             <button
               onClick={handleSearch}
-              className="m-1.5 flex items-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-brand-600 cursor-pointer shrink-0"
+              className="m-1.5 flex items-center gap-2 rounded-full bg-brand-500 px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-600 cursor-pointer shrink-0 md:px-7 md:py-3.5"
             >
               Buscar <Search className="h-4 w-4" />
             </button>
@@ -111,17 +109,17 @@ export default function Hero() {
         </div>
 
         {/* CHIPS */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          <span className="text-sm font-medium text-white/60">Descubra Gravatá:</span>
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 md:gap-3">
+          <span className="hidden text-sm font-medium text-white/60 md:block">Descubra Gravatá:</span>
           {chips.map((chip) => {
             const Icon = chip.icon;
             return (
               <button
                 key={chip.value}
                 onClick={() => navigate(`/resultados?q=${chip.value}&local=Gravatá`)}
-                className="flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer"
+                className="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer md:px-4 md:py-2 md:text-sm"
               >
-                <Icon className="h-3.5 w-3.5" />
+                <Icon className="h-3 w-3 md:h-3.5 md:w-3.5" />
                 {chip.label}
               </button>
             );

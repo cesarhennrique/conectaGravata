@@ -20,7 +20,7 @@ export default function Categoria() {
       {/* Cards sobrepostos — absolute no topo da seção, -translate-y-1/2 sobe metade sobre o hero */}
       <div className="absolute top-0 left-0 right-0 -translate-y-1/2 px-5 md:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
             {categories.map((cat) => {
               const Icon = cat.icon;
               return (
@@ -44,7 +44,7 @@ export default function Categoria() {
       </div>
 
       {/* Espaço + botão Ver todos */}
-      <div className="flex flex-col items-center pt-28 md:pt-32">
+      <div className="flex flex-col items-center pt-56 sm:pt-44 md:pt-32">
         <button
           onClick={() => navigate("/resultados?local=Gravatá")}
           className="rounded-full border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-brand-500 hover:text-white hover:border-brand-500 cursor-pointer"
