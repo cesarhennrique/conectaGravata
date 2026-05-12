@@ -45,7 +45,7 @@ export default function Resultados() {
       const { data, error } = await supabase
         .from("businesses")
         .select("*")
-        .eq("status", "active")
+        .neq("status", "inactive")
         .order("created_at", { ascending: false });
 
       if (error) {

@@ -18,11 +18,10 @@ export default function FeaturedBusinesses() {
       const { data, error } = await supabase
         .from("businesses")
         .select("*")
-        .eq("status", "active")
+        .neq("status", "inactive")
         .order("featured", { ascending: false })
         .order("created_at", { ascending: false })
         .limit(12);
-      console.log("FeaturedBusinesses — data:", data, "error:", error);
       if (!error) setBusinesses((data || []).map(mapSupabaseBusiness));
       setLoading(false);
     }
