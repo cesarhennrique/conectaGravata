@@ -28,7 +28,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative flex min-h-[80vh] flex-col justify-center pb-10 pt-20 md:min-h-screen md:items-center md:pb-32 md:pt-24">
+    <section className="relative flex min-h-[80vh] flex-col justify-center pb-28 pt-20 md:min-h-screen md:items-center md:pb-32 md:pt-24">
       {/* FUNDO */}
       <div className="absolute inset-0 z-0">
         <picture>

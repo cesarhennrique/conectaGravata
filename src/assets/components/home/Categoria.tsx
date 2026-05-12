@@ -16,7 +16,7 @@ export default function Categoria() {
   const navigate = useNavigate();
 
   return (
-    <section id="categorias" className="relative bg-white pb-10 md:pb-20">
+    <section id="categorias" className="relative hidden bg-white pb-10 md:block md:pb-20">
 
       {/* ── MOBILE ── */}
       <div className="relative z-20 px-4 pt-8 md:hidden">
