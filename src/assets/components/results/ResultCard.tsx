@@ -14,7 +14,7 @@ type ResultCardProps = {
 };
 
 export default function ResultCard({
-  id, name, category, location, image, description, plan, whatsapp, isOpenNow,
+  id, name, location, image, description, plan, whatsapp, isOpenNow,
 }: ResultCardProps) {
   const isPremium = plan === "premium";
 
@@ -37,17 +37,12 @@ export default function ResultCard({
           decoding="async"
         />
 
-        {/* Badges topo esquerdo */}
-        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-          {isPremium && (
-            <span className="flex items-center gap-1 rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white shadow">
-              ★ Destaque
-            </span>
-          )}
-          <span className="flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm backdrop-blur-sm">
-            {category}
+        {/* Badge destaque topo esquerdo */}
+        {isPremium && (
+          <span className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white shadow">
+            ★ Destaque
           </span>
-        </div>
+        )}
 
         {/* Badge open/closed topo direito */}
         <span className={`absolute right-3 top-3 rounded-sm px-2.5 py-1 text-xs font-bold text-white shadow ${isOpenNow ? "bg-green-500" : "bg-red-500"}`}>
