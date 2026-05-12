@@ -32,7 +32,6 @@ export default function Categoria() {
                 <span className="text-xs font-bold text-slate-800 text-center leading-tight group-hover:text-brand-500 transition">
                   {cat.label}
                 </span>
-                <span className="text-[10px] text-slate-400">(—)</span>
                 <div className="mt-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-brand-50 transition group-hover:bg-brand-100">
                   <Icon className="h-4 w-4 text-brand-500" strokeWidth={1.5} />
                 </div>
@@ -67,8 +66,7 @@ export default function Categoria() {
                   <span className="text-sm font-bold text-slate-800 text-center leading-tight group-hover:text-brand-500 transition">
                     {cat.label}
                   </span>
-                  <span className="text-xs text-slate-400">(—)</span>
-                  <div className="mt-2 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 transition group-hover:bg-brand-100">
+                    <div className="mt-2 flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 transition group-hover:bg-brand-100">
                     <Icon className="h-5 w-5 text-brand-500" strokeWidth={1.5} />
                   </div>
                 </button>

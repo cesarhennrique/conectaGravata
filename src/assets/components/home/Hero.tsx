@@ -1,4 +1,4 @@
-import { Search, MapPin, LayoutGrid, UtensilsCrossed, ShoppingBag, Hotel, Landmark } from "lucide-react";
+import { Search, MapPin, LayoutGrid, UtensilsCrossed, ShoppingBag, Hotel, Landmark, ChevronDown, ChevronUp, Clock } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const categoryOptions = [
 export default function Hero() {
   const [keyword, setKeyword]   = useState("");
   const [category, setCategory] = useState("");
+  const [showMoreCats, setShowMoreCats] = useState(false);
   const navigate = useNavigate();
 
   function handleSearch() {
@@ -42,7 +43,7 @@ export default function Hero() {
           />
         </picture>
         <div className="absolute inset-0 bg-black/65" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-white/30 to-transparent md:hidden" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-bacl/30 to-transparent md:hidden" />
       </div>
 
       {/* CONTEÚDO */}
@@ -109,22 +110,66 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* CHIPS */}
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 md:gap-3">
-          <span className="hidden text-sm font-medium text-white/60 md:block">Descubra Gravatá:</span>
+        {/* CHIPS — desktop */}
+        <div className="mt-5 hidden flex-wrap items-center justify-center gap-2 md:flex md:gap-3">
+          <span className="text-sm font-medium text-white/60">Descubra Gravatá:</span>
           {chips.map((chip) => {
             const Icon = chip.icon;
             return (
               <button
                 key={chip.value}
                 onClick={() => navigate(`/resultados?q=${chip.value}&local=Gravatá`)}
-                className="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer md:px-4 md:py-2 md:text-sm"
+                className="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer"
               >
-                <Icon className="h-3 w-3 md:h-3.5 md:w-3.5" />
+                <Icon className="h-3.5 w-3.5" />
                 {chip.label}
               </button>
             );
           })}
+        </div>
+
+        {/* FILTROS MOBILE */}
+        <div className="mt-4 flex flex-col items-center gap-2 md:hidden">
+          {/* Linha 1: categorias principais + ver mais */}
+          <div className="flex flex-wrap justify-center gap-2">
+            {chips.map((chip) => {
+              const Icon = chip.icon;
+              return (
+                <button
+                  key={chip.value}
+                  onClick={() => navigate(`/resultados?categoria=${chip.value}`)}
+                  className="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer"
+                >
+                  <Icon className="h-3 w-3" />
+                  {chip.label}
+                </button>
+              );
+            })}
+            {showMoreCats && ["Cafeteria","Beleza","Serviços","Saúde","Moda","Turismo"].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => navigate(`/resultados?categoria=${cat.toLowerCase()}`)}
+                className="rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer"
+              >
+                {cat}
+              </button>
+            ))}
+            <button
+              onClick={() => setShowMoreCats(!showMoreCats)}
+              className="flex items-center gap-1 rounded-full border border-white/40 bg-white/15 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition hover:bg-white/25 cursor-pointer"
+            >
+              {showMoreCats ? <><ChevronUp className="h-3 w-3" />Menos</> : <><ChevronDown className="h-3 w-3" />Ver mais</>}
+            </button>
+          </div>
+
+          {/* Linha 2: toggle Aberto agora */}
+          <button
+            onClick={() => navigate("/resultados?aberto=true")}
+            className="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer"
+          >
+            <Clock className="h-3 w-3" />
+            Aberto agora
+          </button>
         </div>
       </div>
     </section>
