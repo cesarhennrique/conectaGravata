@@ -48,7 +48,7 @@ export default function FeaturedBusinesses() {
   }
 
   return (
-    <section id="destaques" className="bg-white py-10 md:py-24 md:px-8">
+    <section id="destaques" className="bg-transparent py-10 md:bg-white md:py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
 
         {/* Header mobile */}
