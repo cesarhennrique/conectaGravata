@@ -66,16 +66,17 @@ export default function FeaturedBusinesses() {
         </div>
 
         {/* Header desktop */}
-        <div className="mb-12 hidden text-center md:block">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-500">
-            Empresas em Destaque
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-slate-900 md:text-4xl">
-            Os Melhores Negócios de Gravatá
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-500">
-            Empresas locais com presença fortalecida no portal, prontas para atender moradores e turistas.
-          </p>
+        <div className="mb-10 hidden items-center justify-between md:flex">
+          <div className="flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-brand-500" />
+            <h2 className="text-2xl font-extrabold text-slate-900">Destaques da cidade</h2>
+          </div>
+          <button
+            onClick={() => navigate("/resultados?local=Gravatá")}
+            className="flex cursor-pointer items-center gap-1 text-sm font-semibold text-brand-500 transition hover:text-brand-600"
+          >
+            Ver todos <ArrowUpRight className="h-4 w-4" />
+          </button>
         </div>
 
         {loading ? (

@@ -11,31 +11,31 @@ export default function MobileExploreCard() {
   const navigate = useNavigate();
 
   return (
-    <div className="overflow-hidden rounded-3xl bg-slate-900 shadow-lg md:hidden">
-      <div className="relative flex items-center justify-between p-5">
+    <div className="overflow-hidden rounded-3xl bg-slate-900 shadow-lg">
+      <div className="relative flex items-center justify-between p-5 md:p-8">
         {/* Texto */}
-        <div className="flex-1 pr-4">
-          <p className="text-xs font-bold uppercase tracking-wide text-brand-400">Explore Gravatá</p>
-          <h3 className="mt-1.5 text-lg font-extrabold leading-snug text-white">
+        <div className="flex-1 pr-4 md:pr-16">
+          <p className="text-xs font-bold uppercase tracking-wide text-brand-400 md:text-sm">Explore Gravatá</p>
+          <h3 className="mt-1.5 text-lg font-extrabold leading-snug text-white md:text-2xl">
             Roteiros incríveis para viver o melhor da cidade!
           </h3>
           <button
             onClick={() => navigate("/resultados?local=Gravatá")}
-            className="mt-4 flex cursor-pointer items-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-xs font-bold text-white transition hover:bg-brand-600"
+            className="mt-4 flex cursor-pointer items-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-xs font-bold text-white transition hover:bg-brand-600 md:px-7 md:py-3 md:text-sm"
           >
             Ver roteiros <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
 
         {/* Polaroids */}
-        <div className="relative h-28 w-28 shrink-0">
-          <div className="absolute right-8 top-0 h-20 w-16 -rotate-6 overflow-hidden rounded-lg border-2 border-white bg-white shadow-lg">
+        <div className="relative h-28 w-36 shrink-0 md:h-40 md:w-52">
+          <div className="absolute right-12 top-0 h-20 w-16 -rotate-6 overflow-hidden rounded-lg border-2 border-white bg-white shadow-lg md:right-20 md:h-28 md:w-24">
             <img src={photos[0]} alt="" className="h-full w-full object-cover" />
           </div>
-          <div className="absolute right-2 top-3 h-20 w-16 rotate-3 overflow-hidden rounded-lg border-2 border-white bg-white shadow-xl">
+          <div className="absolute right-4 top-3 h-20 w-16 rotate-3 overflow-hidden rounded-lg border-2 border-white bg-white shadow-xl md:right-6 md:h-28 md:w-24">
             <img src={photos[1]} alt="" className="h-full w-full object-cover" />
           </div>
-          <div className="absolute right-6 top-8 h-20 w-16 -rotate-2 overflow-hidden rounded-lg border-2 border-white bg-white shadow-lg">
+          <div className="absolute right-8 top-8 h-20 w-16 -rotate-2 overflow-hidden rounded-lg border-2 border-white bg-white shadow-lg md:right-12 md:h-28 md:w-24">
             <img src={photos[2]} alt="" className="h-full w-full object-cover" />
           </div>
         </div>

@@ -236,42 +236,40 @@ export default function Hero() {
       </div>
 
       {/* ── DESKTOP LAYOUT ── */}
-      <div className="relative z-10 hidden w-full px-5 text-center md:block">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70 md:text-sm">
-          Descubra e conecte-se com os melhores negócios de Gravatá
-        </p>
-        <h1 className="mt-2 text-3xl font-extrabold leading-tight text-white md:mt-4 md:text-6xl lg:text-[5rem]">
-          Encontre o Melhor de <br />
-          <span className="text-brand-500">GRAVATÁ - PE</span>
-        </h1>
+      <div className="relative z-10 hidden w-full px-8 md:block">
+        <div className="mx-auto max-w-5xl">
+          {/* Título */}
+          <p className="text-sm font-medium text-white/70">Bem-vindo a</p>
+          <div className="mt-1 flex items-center gap-4">
+            <h1 className="text-7xl font-extrabold text-white lg:text-8xl">Gravatá</h1>
+            <Heart className="h-10 w-10 fill-brand-500 text-brand-500" />
+          </div>
+          <p className="mt-3 max-w-lg text-base leading-7 text-white/70">
+            Descubra o melhor da nossa cidade: gastronomia, lazer, hospedagem e muito mais!
+          </p>
 
-        <div className="mx-auto mt-8 w-full max-w-3xl overflow-hidden rounded-full bg-white shadow-2xl">
-          <div className="flex items-center">
-            <div className="flex flex-1 items-center gap-2 px-5">
-              <Search className="h-4 w-4 shrink-0 text-slate-400" />
+          {/* Search bar */}
+          <div className="mt-8 flex items-center gap-3">
+            <div className="flex flex-1 items-center gap-3 rounded-full bg-white px-6 py-4 shadow-2xl">
+              <Search className="h-5 w-5 shrink-0 text-brand-500" />
               <input
                 type="text"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter") handleSearch(); }}
                 placeholder="O que você procura?"
-                className="w-full bg-transparent py-4 text-sm text-slate-700 outline-none placeholder:text-slate-400"
+                className="flex-1 bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400"
               />
-            </div>
-            <div className="hidden h-8 w-px shrink-0 bg-slate-200 md:block" />
-            <div className="hidden items-center gap-2 px-5 md:flex">
+              <div className="h-6 w-px bg-slate-200" />
               <MapPin className="h-4 w-4 shrink-0 text-brand-500" />
               <span className="whitespace-nowrap text-sm text-slate-500">Gravatá, PE</span>
-            </div>
-            <div className="hidden h-8 w-px shrink-0 bg-slate-200 md:block" />
-            <div className="hidden items-center gap-2 px-5 md:flex">
-              <LayoutGrid className="h-4 w-4 shrink-0 text-slate-400" />
+              <div className="h-6 w-px bg-slate-200" />
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="bg-transparent py-4 text-sm text-slate-500 outline-none cursor-pointer"
+                className="bg-transparent text-sm text-slate-500 outline-none cursor-pointer"
               >
-                <option value="">Selecionar Categoria</option>
+                <option value="">Todas categorias</option>
                 {categoryOptions.map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
@@ -279,28 +277,30 @@ export default function Hero() {
             </div>
             <button
               onClick={handleSearch}
-              className="m-1.5 flex items-center gap-2 rounded-full bg-brand-500 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-brand-600 cursor-pointer shrink-0"
+              className="flex h-14 w-14 shrink-0 cursor-pointer items-center justify-center rounded-full bg-brand-500 shadow-2xl transition hover:bg-brand-600"
             >
-              Buscar <Search className="h-4 w-4" />
+              <Search className="h-5 w-5 text-white" />
             </button>
           </div>
-        </div>
 
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-          <span className="text-sm font-medium text-white/60">Descubra Gravatá:</span>
-          {chips.map((chip) => {
-            const Icon = chip.icon;
-            return (
-              <button
-                key={chip.value}
-                onClick={() => navigate(`/resultados?q=${chip.value}&local=Gravatá`)}
-                className="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-brand-500 hover:border-brand-500 cursor-pointer"
-              >
-                <Icon className="h-3.5 w-3.5" />
-                {chip.label}
-              </button>
-            );
-          })}
+          {/* Cards de categoria — desktop */}
+          <div className="mt-8 grid grid-cols-8 gap-3">
+            {[...chips, ...extraMobileCategories].map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.value}
+                  onClick={() => navigate(`/resultados?q=${item.value}&local=Gravatá`)}
+                  className="group flex cursor-pointer flex-col items-center gap-2"
+                >
+                  <div className="flex h-16 w-full items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm shadow transition hover:bg-white">
+                    <Icon className="h-6 w-6 text-white transition group-hover:text-brand-500" />
+                  </div>
+                  <span className="text-center text-xs font-semibold text-white/90">{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

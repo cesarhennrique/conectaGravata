@@ -1,6 +1,5 @@
 import Navbar from "../components/layout/Navbar";
 import Hero from "../components/home/Hero";
-import Categoria from "../components/home/Categoria";
 import MobileExploreCard from "../components/home/MobileExploreCard";
 import FeaturedBusinesses from "../components/home/FeatureBusinesses";
 import CtaBanner from "../components/home/CtaBanner";
@@ -11,17 +10,19 @@ export default function Home() {
     <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
       <Hero />
-      {/* Explore card sobrepõe a fronteira hero / fundo branco */}
+      {/* Mobile: explore card sobrepõe a fronteira + fundo branco arredondado */}
       <div className="relative z-20 -mt-16 px-4 md:hidden">
         <MobileExploreCard />
       </div>
-      {/* Container branco arredondado — mobile only */}
       <div className="relative z-10 -mt-6 rounded-t-3xl bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.12)] md:hidden">
         <FeaturedBusinesses />
       </div>
-      {/* Desktop: layout normal */}
-      <div className="hidden md:block">
-        <Categoria />
+
+      {/* Desktop */}
+      <div className="hidden bg-white md:block">
+        <div className="mx-auto max-w-7xl px-8 py-16">
+          <MobileExploreCard />
+        </div>
         <FeaturedBusinesses />
       </div>
       <CtaBanner />
