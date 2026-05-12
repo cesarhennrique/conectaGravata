@@ -62,8 +62,9 @@ export default function ServiceCategoriesPage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-brand-400 md:text-sm">
             Prestadores de Serviço
           </p>
-          <h1 className="mt-3 text-2xl font-extrabold leading-tight text-white md:text-5xl">
-            Encontre Profissionais em <span className="text-brand-500">Gravatá</span>
+          <h1 className="mt-3 text-[1.35rem] font-extrabold leading-tight text-white sm:text-3xl md:text-5xl">
+            Encontre Profissionais em{" "}
+            <span className="whitespace-nowrap text-brand-500">Gravatá</span>
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-400 md:text-base">
             Eletricistas, encanadores, pintores e muito mais — profissionais locais para resolver o seu dia.
