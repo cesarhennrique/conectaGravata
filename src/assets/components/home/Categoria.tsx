@@ -16,10 +16,10 @@ export default function Categoria() {
   const navigate = useNavigate();
 
   return (
-    <section id="categorias" className="relative bg-white pb-10 md:pb-20">
+    <section id="categorias" className="relative bg-white pt-[55px] pb-10 md:pt-0 md:pb-20">
 
-      {/* ── MOBILE: -mt-14 puxa o grid 56px acima da borda, fazendo a 1ª linha cruzar o hero ── */}
-      <div className="relative z-10 -mt-14 px-4 md:hidden">
+      {/* ── MOBILE: -mt-[55px] posiciona os cards com 50% dentro do hero ── */}
+      <div className="relative z-20 -mt-[55px] px-4 md:hidden">
         <div className="grid grid-cols-3 gap-2.5">
           {categories.map((cat) => {
             const Icon = cat.icon;

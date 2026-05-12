@@ -25,7 +25,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center pb-32 pt-20 md:pt-24">
+    <section className="relative flex min-h-screen flex-col items-center justify-center pb-48 pt-20 md:pb-32 md:pt-24">
       {/* FUNDO */}
       <div className="absolute inset-0 z-0">
         <picture>
@@ -41,7 +41,7 @@ export default function Hero() {
             height="900"
           />
         </picture>
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/65" />
       </div>
 
       {/* CONTEÚDO */}
@@ -54,8 +54,8 @@ export default function Hero() {
 
         {/* Título — menor no mobile */}
         <h1 className="mt-2 text-3xl font-extrabold leading-tight text-white md:mt-4 md:text-6xl lg:text-[5rem]">
-          Encontre o Melhor de{" "}
-          <span className="text-brand-500">GRAVATÁ</span>
+          Encontre o Melhor de <br />{" "}
+          <span className="text-brand-500">GRAVATÁ - PE</span>
         </h1>
 
         {/* BARRA DE BUSCA */}
