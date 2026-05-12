@@ -17,9 +17,11 @@ export default function FeaturedBusinesses() {
     async function load() {
       const { data, error } = await supabase
         .from("businesses")
-        .select("id, name, status, featured")
-        .limit(20);
-      console.log("DEBUG businesses (sem filtro):", data, "error:", error);
+        .select("*")
+        .neq("status", "inactive")
+        .order("featured", { ascending: false })
+        .order("created_at", { ascending: false })
+        .limit(12);
       if (!error) setBusinesses((data || []).map(mapSupabaseBusiness));
       setLoading(false);
     }
