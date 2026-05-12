@@ -1,4 +1,4 @@
-import { Search, MapPin, LayoutGrid, UtensilsCrossed, ShoppingBag, Hotel, Landmark, SlidersHorizontal, Heart, ChevronUp } from "lucide-react";
+import { Search, MapPin, LayoutGrid, UtensilsCrossed, ShoppingBag, Hotel, Landmark, SlidersHorizontal, Heart, ChevronUp, X, Clock, CreditCard } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,11 @@ const chips = [
   { label: "Turismo",     icon: Landmark,        value: "turismo"     },
 ];
 
+const allCategories = [
+  "Restaurante","Loja","Pousada","Cafeteria","Beleza",
+  "Saúde","Serviços","Moda","Automotivo","Academia","Educação","Turismo",
+];
+
 const extraMobileCategories = ["Cafeteria", "Beleza", "Serviços", "Saúde", "Moda", "Automotivo"];
 
 const categoryOptions = [
@@ -17,10 +22,23 @@ const categoryOptions = [
 ];
 
 export default function Hero() {
-  const [keyword, setKeyword]   = useState("");
-  const [category, setCategory] = useState("");
+  const [keyword, setKeyword]       = useState("");
+  const [category, setCategory]     = useState("");
   const [showMoreCats, setShowMoreCats] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [filterCat, setFilterCat]   = useState("");
+  const [filterOpen2, setFilterOpen2] = useState(false);
+  const [filterCard, setFilterCard] = useState(false);
   const navigate = useNavigate();
+
+  function applyFilters() {
+    const params = new URLSearchParams();
+    if (filterCat) params.set("categoria", filterCat);
+    if (filterOpen2) params.set("aberto", "true");
+    if (filterCard) params.set("cartao", "true");
+    navigate(`/resultados?${params.toString()}`);
+    setFilterOpen(false);
+  }
 
   function handleSearch() {
     const q = keyword.trim() || category.toLowerCase();
@@ -28,6 +46,74 @@ export default function Hero() {
   }
 
   return (
+    <>
+    {/* Overlay do drawer */}
+    {filterOpen && (
+      <div
+        className="fixed inset-0 z-40 bg-black/50 md:hidden"
+        onClick={() => setFilterOpen(false)}
+      />
+    )}
+
+    {/* Drawer de filtros */}
+    <div className={`fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl bg-white px-5 pt-5 pb-8 shadow-2xl transition-transform duration-300 md:hidden ${filterOpen ? "translate-y-0" : "translate-y-full"}`}>
+      {/* Handle + header */}
+      <div className="mb-4 flex items-center justify-between">
+        <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-slate-200 absolute left-1/2 -translate-x-1/2 top-3" />
+        <h3 className="text-base font-extrabold text-slate-900">Filtros</h3>
+        <button onClick={() => setFilterOpen(false)} className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-100 text-slate-500">
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+
+      {/* Categorias */}
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Categoria</p>
+      <div className="flex flex-wrap gap-2">
+        {allCategories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setFilterCat(filterCat === cat.toLowerCase() ? "" : cat.toLowerCase())}
+            className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+              filterCat === cat.toLowerCase()
+                ? "border-brand-500 bg-brand-500 text-white"
+                : "border-slate-200 bg-slate-50 text-slate-700 hover:border-brand-400"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Toggles */}
+      <p className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wide text-slate-500">Preferências</p>
+      <div className="flex gap-3">
+        <button
+          onClick={() => setFilterOpen2(!filterOpen2)}
+          className={`flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
+            filterOpen2 ? "border-brand-500 bg-brand-500 text-white" : "border-slate-200 bg-slate-50 text-slate-700"
+          }`}
+        >
+          <Clock className="h-3.5 w-3.5" /> Aberto agora
+        </button>
+        <button
+          onClick={() => setFilterCard(!filterCard)}
+          className={`flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
+            filterCard ? "border-brand-500 bg-brand-500 text-white" : "border-slate-200 bg-slate-50 text-slate-700"
+          }`}
+        >
+          <CreditCard className="h-3.5 w-3.5" /> Aceita cartão
+        </button>
+      </div>
+
+      {/* Botão aplicar */}
+      <button
+        onClick={applyFilters}
+        className="mt-6 w-full cursor-pointer rounded-2xl bg-brand-500 py-3.5 text-sm font-bold text-white transition hover:bg-brand-600"
+      >
+        Ver resultados
+      </button>
+    </div>
+
     <section className="relative flex min-h-[80vh] flex-col justify-center pb-28 pt-20 md:min-h-screen md:items-center md:pb-32 md:pt-24">
       {/* FUNDO */}
       <div className="absolute inset-0 z-0">
@@ -74,7 +160,7 @@ export default function Hero() {
             />
           </div>
           <button
-            onClick={() => navigate("/resultados")}
+            onClick={() => setFilterOpen(true)}
             className="flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-brand-500 shadow-xl transition hover:bg-brand-600"
           >
             <SlidersHorizontal className="h-5 w-5 text-white" />
@@ -89,7 +175,7 @@ export default function Hero() {
               return (
                 <button
                   key={chip.value}
-                  onClick={() => navigate(`/resultados?categoria=${chip.value}`)}
+                  onClick={() => navigate(`/resultados?q=${chip.value}&local=Gravatá`)}
                   className="flex cursor-pointer flex-col items-center gap-1.5"
                 >
                   <div className="flex h-14 w-full items-center justify-center rounded-2xl bg-white shadow-lg transition hover:bg-brand-50">
@@ -125,7 +211,7 @@ export default function Hero() {
               {extraMobileCategories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => navigate(`/resultados?categoria=${cat.toLowerCase()}`)}
+                  onClick={() => navigate(`/resultados?q=${cat.toLowerCase()}&local=Gravatá`)}
                   className="flex cursor-pointer flex-col items-center gap-1.5"
                 >
                   <div className="flex h-12 w-full items-center justify-center rounded-2xl bg-white/90 shadow transition hover:bg-brand-50">
@@ -208,5 +294,6 @@ export default function Hero() {
         </div>
       </div>
     </section>
+    </>
   );
 }
