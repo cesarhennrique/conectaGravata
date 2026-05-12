@@ -11,7 +11,7 @@ export default function MobileExploreCard() {
   const navigate = useNavigate();
 
   return (
-    <div className="relative z-10 mx-4 -mt-16 overflow-hidden rounded-3xl bg-slate-900 shadow-2xl md:hidden">
+    <div className="relative z-10 mx-4 -mt-16 overflow-hidden rounded-3xl shadow-2xl md:hidden" style={{background: "linear-gradient(135deg, #1e1b2e 0%, #2d1f3d 40%, #3b1f2b 100%)"}}>
       <div className="relative flex items-center justify-between p-5">
         {/* Texto */}
         <div className="flex-1 pr-4">
