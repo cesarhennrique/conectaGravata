@@ -49,7 +49,7 @@ export default function ServiceCategoriesPage() {
   return (
     <>
       {/* Hero Banner */}
-      <div className="relative flex min-h-[320px] items-center overflow-hidden bg-slate-900 md:min-h-[380px]">
+      <div className="relative flex min-h-[420px] items-center overflow-hidden bg-slate-900 md:min-h-[480px]">
         <div className="absolute inset-0">
           <picture>
             <source srcSet="/hero-gravata.webp" type="image/webp" />
@@ -58,7 +58,7 @@ export default function ServiceCategoriesPage() {
           <div className="absolute inset-0 bg-slate-900/60" />
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-4xl px-5 py-20 text-center md:py-24">
+        <div className="relative z-10 mx-auto w-full max-w-4xl px-5 pt-24 pb-16 text-center md:pt-28 md:pb-20">
           <h1 className="text-3xl font-extrabold leading-tight text-white md:text-5xl">
             Profissionais em <span className="text-brand-500">Gravatá</span>
           </h1>
