@@ -19,7 +19,7 @@ export default function FeaturedBusinesses() {
         .from("businesses")
         .select("*")
         .eq("status", "active")
-        .eq("featured", true)
+        .order("featured", { ascending: false })
         .order("created_at", { ascending: false })
         .limit(12);
       if (!error) setBusinesses((data || []).map(mapSupabaseBusiness));
@@ -102,10 +102,12 @@ export default function FeaturedBusinesses() {
                       </span>
                     </div>
 
-                    {/* Badge Destaque */}
-                    <span className="absolute right-3 top-3 rounded-full bg-green-500 px-2.5 py-1 text-xs font-bold text-white shadow">
-                      Destaque
-                    </span>
+                    {/* Badge Destaque — só para empresas premium */}
+                    {b.featured && (
+                      <span className="absolute right-3 top-3 rounded-full bg-green-500 px-2.5 py-1 text-xs font-bold text-white shadow">
+                        Destaque
+                      </span>
+                    )}
 
                     {/* Coração */}
                     <button className="absolute bottom-3 right-3 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white/90 text-slate-400 shadow transition hover:text-brand-500">
