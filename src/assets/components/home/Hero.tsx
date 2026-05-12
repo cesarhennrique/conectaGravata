@@ -42,6 +42,7 @@ export default function Hero() {
           />
         </picture>
         <div className="absolute inset-0 bg-black/65" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-white/30 to-transparent md:hidden" />
       </div>
 
       {/* CONTEÚDO */}
