@@ -32,7 +32,7 @@ export default function ResultsSearchBar() {
     : "Explorar Empresas";
 
   return (
-    <div className="relative overflow-hidden bg-slate-900 py-14 md:py-20">
+    <div className="relative overflow-hidden bg-slate-900 py-20 md:py-28">
       {/* Fundo */}
       <div className="absolute inset-0">
         <picture>

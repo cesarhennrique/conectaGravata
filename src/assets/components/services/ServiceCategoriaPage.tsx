@@ -49,7 +49,7 @@ export default function ServiceCategoriesPage() {
   return (
     <>
       {/* Hero Banner */}
-      <div className="relative overflow-hidden bg-slate-900 py-14 md:py-20">
+      <div className="relative overflow-hidden bg-slate-900 py-20 md:py-28">
         <div className="absolute inset-0">
           <picture>
             <source srcSet="/hero-gravata.webp" type="image/webp" />
