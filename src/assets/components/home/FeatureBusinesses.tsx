@@ -22,6 +22,7 @@ export default function FeaturedBusinesses() {
         .order("featured", { ascending: false })
         .order("created_at", { ascending: false })
         .limit(12);
+      console.log("FeaturedBusinesses — data:", data, "error:", error);
       if (!error) setBusinesses((data || []).map(mapSupabaseBusiness));
       setLoading(false);
     }
