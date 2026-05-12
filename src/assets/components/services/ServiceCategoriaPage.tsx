@@ -49,7 +49,7 @@ export default function ServiceCategoriesPage() {
   return (
     <>
       {/* Hero Banner */}
-      <div className="relative overflow-hidden bg-slate-900 py-20 md:py-28">
+      <div className="relative flex min-h-[320px] items-center overflow-hidden bg-slate-900 md:min-h-[380px]">
         <div className="absolute inset-0">
           <picture>
             <source srcSet="/hero-gravata.webp" type="image/webp" />
@@ -58,19 +58,18 @@ export default function ServiceCategoriesPage() {
           <div className="absolute inset-0 bg-slate-900/60" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-400">
+        <div className="relative z-10 mx-auto w-full max-w-4xl px-5 py-20 text-center md:py-24">
+          <p className="text-xs font-semibold uppercase tracking-widest text-brand-400 md:text-sm">
             Prestadores de Serviço
           </p>
-          <h1 className="mt-3 text-3xl font-extrabold text-white md:text-4xl">
-            Encontre Profissionais em <span className="text-brand-500">Gravatá</span>
+          <h1 className="mt-3 text-4xl font-extrabold leading-tight text-white md:text-5xl">
+            Encontre Profissionais em{" "}
+            <span className="text-brand-500">Gravatá</span>
           </h1>
-          <p className="mt-3 text-sm text-slate-400 md:text-base">
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-400 md:text-base">
             Eletricistas, encanadores, pintores e muito mais — profissionais locais para resolver o seu dia.
           </p>
-
-          {/* Breadcrumb */}
-          <p className="mt-4 text-sm text-slate-500">
+          <p className="mt-5 text-sm text-slate-500">
             Início <span className="mx-1.5 text-slate-600">›</span>
             <span className="text-brand-400">Prestadores</span>
           </p>
