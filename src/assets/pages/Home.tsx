@@ -11,11 +11,12 @@ export default function Home() {
     <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
       <Hero />
+      {/* Explore card sobrepõe a fronteira hero / fundo branco */}
+      <div className="relative z-20 -mt-16 px-4 md:hidden">
+        <MobileExploreCard />
+      </div>
       {/* Container branco arredondado — mobile only */}
       <div className="relative z-10 -mt-6 rounded-t-3xl bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.12)] md:hidden">
-        <div className="px-4 pt-5 pb-2">
-          <MobileExploreCard />
-        </div>
         <FeaturedBusinesses />
       </div>
       {/* Desktop: layout normal */}
