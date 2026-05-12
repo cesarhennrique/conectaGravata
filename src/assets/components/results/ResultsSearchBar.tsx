@@ -1,4 +1,4 @@
-import { Search, MapPin, LayoutGrid } from "lucide-react";
+import { Search, MapPin, LayoutGrid, ChevronDown, ChevronUp } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -7,13 +7,22 @@ const categoryOptions = [
   "Saúde","Serviços","Moda","Automotivo","Academia","Educação","Turismo",
 ];
 
-const mobileFilterChips = [
+const mainChips = [
   { label: "Restaurante", value: "restaurante" },
   { label: "Pousadas",    value: "pousada"     },
-  { label: "Cafeteria",   value: "cafeteria"   },
-  { label: "Beleza",      value: "beleza"      },
-  { label: "Serviços",    value: "serviços"    },
   { label: "Lojas",       value: "loja"        },
+  { label: "Beleza",      value: "beleza"      },
+];
+
+const extraChips = [
+  { label: "Cafeteria",   value: "cafeteria"   },
+  { label: "Serviços",    value: "serviços"    },
+  { label: "Saúde",       value: "saúde"       },
+  { label: "Moda",        value: "moda"        },
+  { label: "Automotivo",  value: "automotivo"  },
+  { label: "Academia",    value: "academia"    },
+  { label: "Educação",    value: "educação"    },
+  { label: "Turismo",     value: "turismo"     },
 ];
 
 export default function ResultsSearchBar() {
@@ -22,6 +31,7 @@ export default function ResultsSearchBar() {
 
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [category, setCategory] = useState(searchParams.get("q") || "");
+  const [showMoreCats, setShowMoreCats] = useState(false);
 
   useEffect(() => {
     setQuery(searchParams.get("q") || "");
@@ -113,7 +123,7 @@ export default function ResultsSearchBar() {
         <div className="mt-4 flex flex-col items-center gap-3 md:hidden">
           {/* Chips de categoria */}
           <div className="flex flex-wrap justify-center gap-2">
-            {mobileFilterChips.map((chip) => {
+            {[...mainChips, ...(showMoreCats ? extraChips : [])].map((chip) => {
               const active = searchParams.get("categoria") === chip.value || searchParams.get("q") === chip.value;
               return (
                 <button
@@ -134,6 +144,14 @@ export default function ResultsSearchBar() {
                 </button>
               );
             })}
+
+            {/* Ver mais / Menos */}
+            <button
+              onClick={() => setShowMoreCats(!showMoreCats)}
+              className="flex items-center gap-1 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition cursor-pointer hover:bg-white/20"
+            >
+              {showMoreCats ? <><ChevronUp className="h-3 w-3" /> Menos</> : <><ChevronDown className="h-3 w-3" /> Ver mais</>}
+            </button>
           </div>
 
           {/* Toggles: Aberto agora + Aceita cartão */}
