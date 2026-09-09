@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AdminLayout from "../components/admin/AdminLayout";
 import { supabase } from "../../lib/supabase";
+import { getEffectiveStatus } from "../shared/businessStatus";
 
 type BusinessRow = {
   id: number;
@@ -116,7 +117,7 @@ export default function AdminCompanies() {
                       {company.plan}
                     </td>
                     <td className="px-6 py-4 text-slate-600">
-                      {company.status}
+                      {getEffectiveStatus(company)}
                     </td>
                     <td className="px-6 py-4 text-slate-600">
                       {company.due_date || "-"}

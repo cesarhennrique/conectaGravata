@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import AdminLayout from "../components/admin/AdminLayout";
 import { supabase } from "../../lib/supabase";
 import { Link } from "react-router-dom";
+import { CATEGORIES } from "../shared/categories";
+import { isExpired, getEffectiveStatus } from "../shared/businessStatus";
 import {
   Building2,
   Crown,
@@ -29,13 +31,6 @@ type DashboardRow = {
   featured: boolean;
 };
 
-function isExpired(dueDate: string | null) {
-  if (!dueDate) return false;
-  const today = new Date();
-  const cur = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  return new Date(`${dueDate}T00:00:00`) < cur;
-}
-
 const PLAN_PRICE: Record<string, number> = { premium: 197, pro: 97, basic: 0 };
 
 const PLAN_LABELS: Record<string, { label: string; color: string; bg: string }> = {
@@ -51,16 +46,7 @@ const STATUS_LABELS: Record<string, { label: string; dot: string }> = {
   expired: { label: "Vencida", dot: "bg-red-500" },
 };
 
-const CATEGORIES = [
-  "Todos",
-  "Alimentação",
-  "Saúde",
-  "Educação",
-  "Serviços",
-  "Comércio",
-  "Turismo",
-  "Outros",
-];
+const DASHBOARD_CATEGORIES = ["Todos", ...CATEGORIES];
 
 export default function AdminDashboard() {
   const [rows, setRows] = useState<DashboardRow[]>([]);
@@ -277,7 +263,7 @@ export default function AdminDashboard() {
                     onChange={(e) => setFilterCat(e.target.value)}
                     className="bg-transparent text-sm text-slate-600 outline-none"
                   >
-                    {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
+                    {DASHBOARD_CATEGORIES.map((c) => <option key={c}>{c}</option>)}
                   </select>
                 </div>
 
@@ -323,7 +309,7 @@ export default function AdminDashboard() {
                   <tbody>
                     {filteredRows.slice(0, 10).map((company) => {
                       const plan = PLAN_LABELS[company.plan] ?? { label: company.plan, color: "text-slate-600", bg: "bg-slate-100" };
-                      const statusKey = (company.status === "active" && isExpired(company.due_date)) ? "expired" : company.status;
+                      const statusKey = getEffectiveStatus(company);
                       const status = STATUS_LABELS[statusKey] ?? { label: company.status, dot: "bg-slate-400" };
                       return (
                         <tr key={company.id} className="border-b border-slate-50 transition hover:bg-slate-50">
