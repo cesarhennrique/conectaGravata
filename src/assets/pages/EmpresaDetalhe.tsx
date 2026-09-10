@@ -96,9 +96,9 @@ Gostaria de mais informações.
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <Navbar />
 
-      <section className="px-4 py-8 md:px-6">
+      <section className="px-4 pb-8 pt-20 md:px-6 md:pt-24">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[1.35fr_0.9fr]">
+          <div className="grid gap-8 lg:grid-cols-[1.35fr_0.9fr] lg:items-start">
             <div>
               <div className="relative overflow-hidden rounded-[32px]">
                 <img
@@ -174,7 +174,7 @@ Gostaria de mais informações.
               </div>
             </div>
 
-            <aside className="h-fit rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm">
+            <aside className="h-fit rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-24">
               <h2 className="text-xl font-bold text-slate-900">
                 Informações e contato
               </h2>
