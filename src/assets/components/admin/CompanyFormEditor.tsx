@@ -307,11 +307,46 @@ export default function CompanyFormEditor({ mode, businessId }: Props) {
         if (error) throw new Error("Erro ao salvar empresa.");
       } else {
         if (!businessId) throw new Error("Empresa inválida.");
-        const { error } = await supabase
+
+        // Não basta a ausência de erro: o Postgres/PostgREST pode responder
+        // sem erro mesmo quando 0 linhas foram afetadas (ex: uma política de
+        // RLS que restringe o UPDATE silenciosamente). Buscamos de volta a
+        // linha realmente persistida e conferimos contra o que deveria ter
+        // sido salvo antes de considerar a operação bem-sucedida.
+        const { data: updated, error } = await supabase
           .from("businesses")
           .update(payload)
-          .eq("id", businessId);
+          .eq("id", businessId)
+          .select()
+          .single();
+
         if (error) throw new Error("Erro ao atualizar empresa.");
+        if (!updated) {
+          throw new Error(
+            "O servidor não retornou a empresa atualizada — o UPDATE pode ter afetado 0 linhas (verifique permissões/RLS na tabela businesses)."
+          );
+        }
+
+        const mismatches: string[] = [];
+        if (updated.plan !== payload.plan) {
+          mismatches.push(`plan: esperado "${payload.plan}", persistido "${updated.plan}"`);
+        }
+        if (updated.image_url !== payload.image_url) {
+          mismatches.push(
+            `image_url: esperado ${JSON.stringify(payload.image_url)}, persistido ${JSON.stringify(updated.image_url)}`
+          );
+        }
+        if (updated.featured !== payload.featured) {
+          mismatches.push(`featured: esperado ${payload.featured}, persistido ${updated.featured}`);
+        }
+
+        if (mismatches.length > 0) {
+          throw new Error(
+            `A empresa foi salva, mas o valor retornado pelo servidor diverge do enviado — isso indica um trigger, policy ou coluna no Supabase interferindo, não um bug no formulário. Diferenças: ${mismatches.join(
+              "; "
+            )}`
+          );
+        }
       }
 
       navigate("/admin/empresas");
